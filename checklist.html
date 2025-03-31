@@ -4,7 +4,6 @@
   <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page responsive on mobile devices -->
   <script defer src="itemhandlerservice.js"></script>
-  <script defer src="registerscript.js"></script>
   <style>
     body {
       margin: 0; /* Removes default margin around the page */
@@ -188,7 +187,7 @@
     <h1><span>Fridge</span>Sort</h1> <!-- Logo text -->
   </div>
 
-  <div id="checklistModal" class="modal">
+  <div id="addItemModal" class="modal">
     <div class="modal-content">
       <h2>Neues Lebensmittel</h2>
       <label for="itemName">Lebensmittel:</label>
@@ -206,9 +205,34 @@
       <p id="errorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
       
       <button onclick="saveItem()">Speichern</button>
-      <button onclick="closeModal()">Abbrechen</button>
+      <button onclick="closeAddItemModal()">Abbrechen</button>
     </div>
   </div>
+
+  <div id="editItemModal" class="modal">
+    <div class="modal-content">
+      <h2>Lebensmittel bearbeiten</h2>
+      
+      <label for="editItemName">Lebensmittel:</label>
+      <input type="text" id="editItemName" placeholder="Name eingeben">
+      
+      <label for="editCurrentDate">Datum des Eintrages:</label>
+      <input type="date" id="editCurrentDate" readonly>
+      
+      <label for="editExpiryDate">Ablaufdatum:</label>
+      <input type="date" id="editExpiryDate">
+      
+      <label for="editDescription">Beschreibung:</label>
+      <textarea id="editDescription" placeholder="Beschreibung hinzufügen"></textarea>
+
+      <p id="editErrorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
+      
+      <button onclick="saveEditedItem()">Speichern</button>
+      <button onclick="deleteItem()">Löschen</button>
+      <button onclick="closeEditItemModal()">Abbrechen</button>
+    </div>
+</div>
+
 
   <div class="food-list" id="foodList"></div>
 
@@ -226,6 +250,6 @@
       <li><a href="profile.html"><img src="img/taskbar_profile.png" class="rounded imagesize-icons-taskbar"></a></li>
     </ul>
   </div>  
-  <img src="img/add_button.png" class="imagesize-item-add-button bottom-right-item-add-button" onclick="openModal()">
+  <img src="img/add_button.png" class="imagesize-item-add-button bottom-right-item-add-button" onclick="openAddItemModal()">
 </body>
 </html>
