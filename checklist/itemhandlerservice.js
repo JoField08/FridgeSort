@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
     let expiry = document.getElementById("expiryDate").value;
     let current = document.getElementById("currentDate").value;
     let description = document.getElementById("description").value;
-    const uuid = crypto.randomUUID;
+    const uuid = crypto.randomUUID();
 
     if (name === "" || expiry === "") {
       errorMessage.style.display = "block";
