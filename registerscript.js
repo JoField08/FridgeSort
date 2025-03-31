@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Keine Benutzerdaten gefunden.");
         if (!window.location.href.includes("register.html")) {
             console.log("Weiterleitung zur Registrierung.");
-            window.location.href = "/register.html";
+            window.location.href = "register.html";
         }
         return;
     } else {
