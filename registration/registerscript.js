@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Keine Benutzerdaten gefunden.");
         if (!window.location.href.includes("register.html")) {
             console.log("Weiterleitung zur Registrierung.");
-            window.location.href = "../registration/register.html"; 
+            window.location.href = "window.location.href = "/FridgeSort/registration/register.html";
+ 
         }
         return;
     } else {
