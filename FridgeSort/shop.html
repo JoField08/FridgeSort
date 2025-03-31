@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page responsive on mobile devices -->
+  <style>
+    body {
+      margin: 0; /* Removes default margin around the page */
+      height: 100vh; /* Makes the body take up the full height of the viewport */
+      background-color: #1E1E2E; /* Dark background color */
+      color: #E0E0E0; /* Light gray text color */
+      display: flex; /* Enables Flexbox layout */
+      flex-direction: column; /* Aligns children vertically */
+      overflow: auto; /* Allows scrolling if content overflows */
+      display: block; /* Prevents body from being restricted to 100vh */
+      padding-bottom: 100px; /* Adds space for the navbar at the bottom */
+      padding-top: 0px; /* Removes any space at the top */
+    }
+
+    * {
+      padding: 0; /* Removes padding from all elements */
+      margin: 0; /* Removes margin from all elements */
+      box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
+    }
+
+    .logo {
+      background-color: #1E1E2E; /* Same color as the body background */
+      color: #E0E0E0; /* Light gray color for the text */
+      text-align: center; /* Centers the text horizontally */
+      padding: 20px 0; /* Adds vertical padding */
+      font-size: 36px; /* Sets large font size for the logo */
+      font-weight: bold; /* Makes the logo text bold */
+      letter-spacing: 2px; /* Adds space between the letters */
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Adds shadow to make the logo pop */
+      z-index: 1000; /* Ensures the logo stays on top */
+    }
+    .logo span {
+      color: #50FA7B; /* Changes the color of the "Sort" part of the logo */
+    }
+
+    .bottom-right-item-add-button {
+      position: fixed; /* Fixes the button at a specific position on the screen */
+      bottom: 100px; /* Positions the button 100px from the bottom */
+      right: 10px; /* Positions the button 10px from the right */
+    }
+
+    .imagesize-item-add-button {
+      height: 75px; /* Sets the button height */
+    }
+
+    .modal {
+      display: none; /* Hides the modal by default */
+      position: fixed; /* Fixes the modal at the top of the screen */
+      top: 0; /* Positions the modal at the top */
+      left: 0; /* Positions the modal at the left */
+      width: 100%; /* Makes the modal take up the full width */
+      height: 100%; /* Makes the modal take up the full height */
+      background-color: #282A36; /* Dark background color */
+      color: #E0E0E0; /* Light gray text color */
+      align-items: center; /* Centers content vertically */
+      justify-content: center; /* Centers content horizontally */
+    }
+
+    .modal-content {
+      background-color: white; /* White background for the modal content */
+      padding: 20px; /* Adds padding inside the modal */
+      border-radius: 10px; /* Rounds the corners of the modal */
+      width: 300px; /* Sets a fixed width for the modal */
+      display: flex; /* Uses Flexbox layout for the modal content */
+      flex-direction: column; /* Aligns modal content vertically */
+    }
+    .rounded {
+      border-radius: 10px; /* Rounds the corners of elements */
+    }
+    .smallimage {
+      height: 100px; /* Sets height for small images */
+    }
+    .imagesize-icons-taskbar {
+      height: 50px; /* Sets height for taskbar icons */
+    }
+    .modal-content input, .modal-content select, .modal-content button {
+      margin: 10px 0; /* Adds margin around input fields */
+      padding: 10px; /* Adds padding inside input fields */
+      font-size: 16px; /* Sets font size for inputs and buttons */
+    }
+
+    .entry-box {
+      background-color: #282A36; /* Dark background for entry boxes */
+      color: #E0E0E0; /* Light gray text color */
+      padding: 8px; /* Adds padding inside the entry box */
+      margin: 8px; /* Adds margin around the entry box */
+      border-radius: 10px; /* Rounds the corners of the entry box */
+      width: 90%; /* Makes the entry box take up 90% of the container width */
+      display: flex; /* Enables Flexbox layout */
+      flex-direction: row; /* Aligns items horizontally */
+      align-items: center; /* Centers items vertically */
+      box-sizing: border-box; /* Ensures padding and borders are included in width/height */
+    }
+
+    .entry-box .text-content {
+      flex: 1; /* Makes the text content take up the available space */
+    }
+
+    .entry-box img {
+      width: 80px; /* Sets the width of images */
+      height: 80px; /* Sets the height of images */
+      object-fit: cover; /* Ensures images cover the area without distortion */
+      border-radius: 8px; /* Rounds the corners of images */
+      margin-left: 10px; /* Adds space to the left of the image */
+    }
+
+    .error-message {
+      color: #FF5555; /* Red color for error messages */
+    }
+
+    .modal-content button {
+      border-radius: 8px; /* Rounds the corners of buttons */
+      padding: 12px; /* Adds padding inside buttons */
+      font-size: 16px; /* Sets font size for buttons */
+      border: none; /* Removes button borders */
+      cursor: pointer; /* Changes the cursor to a pointer when hovering over buttons */
+    }
+    .modal-content button:hover {
+      background-color: #50FA7B; /* Changes button background on hover */
+    }
+
+    .nav {
+      width: 100%; /* Makes the navbar span the full width */
+      text-align: center; /* Centers navbar items */
+      background: #1E1E2E; /* Matches the page background color */
+      position: fixed; /* Fixes the navbar to the bottom of the screen */
+      left: 0; /* Positions the navbar at the left */
+      bottom: 0; /* Positions the navbar at the bottom */
+      box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
+      z-index: 1000; /* Ensures navbar stays on top */
+      height: 55px; /* Sets navbar height */
+    }
+
+    .nav ul {
+      list-style-type: none; /* Removes bullets from list items */
+      padding: 0; /* Removes padding */
+      margin: 0; /* Removes margin */
+      display: flex; /* Enables Flexbox layout */
+      justify-content: space-evenly; /* Distributes navbar items evenly */
+      width: 100%; /* Makes the navbar span the full width */
+      height: 100%; /* Ensures icons fill the navbar */
+    }
+
+    .nav ul li {
+      display: inline-block; /* Displays list items inline */
+    }
+
+    .nav ul li .nav-link {
+      text-decoration: none; /* Removes underline from links */
+      color: #ccc; /* Sets link color */
+      padding: 15px; /* Adds padding around the links */
+      display: block; /* Makes links block elements */
+    }
+  </style>
+</head>
+ 
+<body>
+
+  <div class="logo">
+    <h1><span>Fridge</span>Sort</h1> <!-- Logo text -->
+  </div>
+
+  <div class="nav bottom-nav">
+    <ul>
+      <li><a href="map.html"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
+      <li><a href="recepies.html"><img src="img/taskbar_book.png" class="rounded imagesize-icons-taskbar"></a></li>
+      <li><a href="checklist.html"><img src="img/taskbar_checklist.png" class="rounded imagesize-icons-taskbar"></a></li>
+      <li><a href="shop.html"><img src="img/taskbar_shopping_car.png" class="rounded imagesize-icons-taskbar"></a></li>
+      <li><a href="profile.html"><img src="img/taskbar_profile.png" class="rounded imagesize-icons-taskbar"></a></li>
+    </ul>
+  </div>  
+
+</body>
+
+<script>
+  function openModal() {
+    document.getElementById("itemInput").value = ''; /* Clears the input field */
+    document.getElementById("dateInput1").value = new Date().toISOString().split('T')[0]; /* Sets default date */
+    document.getElementById("dateInput2").value = ''; /* Clears the second date input */
+    document.getElementById("storageSelect").value = ''; /* Clears storage selection */
+    document.getElementById("imageInput").value = ''; /* Clears image file input */
+    document.getElementById("error-message").textContent = ""; /* Clears any error messages */
+    document.getElementById("myModal").style.display = "flex"; /* Shows the modal */
+  }
+
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none"; /* Hides the modal */
+  }
+
+  function submitForm() {
+    const item = document.getElementById("itemInput").value; /* Gets item name */
+    const date1 = document.getElementById("dateInput1").value; /* Gets first date */
+    const date2 = document.getElementById("dateInput2").value; /* Gets second date */
+    const storage = document.getElementById("storageSelect").value; /* Gets storage location */
+    const imageFile = document.getElementById("imageInput").files[0]; /* Gets the uploaded image file */
+
+    if (item == null || date1 == null || date2 == null) {
+      document.getElementById("error-message").textContent = "All fields must be filled out!"; /* Displays error if required fields are empty */
+      return;
+    }
+
+    const entryContainer = document.getElementById("entries"); /* Gets the container for entries */
+    const newEntry = document.createElement("div"); /* Creates a new entry box */
+    newEntry.classList.add("entry-box"); /* Adds the entry-box class to the new entry */
+
+    const formattedDate1 = formatDateToGerman(date1); /* Formats the first date */
+    const formattedDate2 = formatDateToGerman(date2); /* Formats the second date */
+
+    let imgElement = ""; /* Initializes imgElement as an empty string */
+    if (imageFile) {
+      const imgURL = URL.createObjectURL(imageFile); /* Creates URL for image */
+      imgElement = `<img src="${imgURL}" alt="Food Image">`; /* Creates image HTML */
+    }
+
+    newEntry.innerHTML = `
+      <div class="text-content">
+        <h4>${item}</h4>
+        <p><span class="label">Expiration Date:</span> ${formattedDate2}</p>
+        <p><span class="label">Entered On:</span> ${formattedDate1}</p>
+        <p><span class="label">Storage:</span> ${storage ? storage : "Not specified"}</p>
+      </div>
+      ${imgElement}
+    `; /* Creates the HTML for the new entry */
+
+    entryContainer.appendChild(newEntry); /* Adds the new entry to the container */
+    closeModal(); /* Closes the modal */
+  }
+
+  function cancelForm() {
+    closeModal(); /* Closes the modal without saving */
+  }
+
+  function formatDateToGerman(date) {
+    const d = new Date(date); /* Creates a Date object */
+    return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`; /* Formats the date to DD.MM.YYYY */
+  }
+
+  function showPage(pageNumber) {
+    const pages = document.querySelectorAll('.page'); /* Selects all pages */
+    pages.forEach(page => {
+      page.classList.remove('active'); /* Removes the 'active' class from all pages */
+    });
+
+    const activePage = document.getElementById('page' + pageNumber); /* Gets the selected page */
+    activePage.classList.add('active'); /* Adds the 'active' class to the selected page */
+  }
+</script>
+
+</html>
