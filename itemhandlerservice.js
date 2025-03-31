@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte Items beim Start
 
-  function openModal() {
-      document.getElementById("checklistModal").style.display = "flex";
+  function openAddItemModal() {
+      document.getElementById("addItemModal").style.display = "flex";
       document.getElementById("currentDate").value = new Date().toISOString().split('T')[0];
     }
     
-  function closeModal() {
-    document.getElementById("checklistModal").style.display = "none"; /* hide Modal */
+  function closeAddItemModal() {
+    document.getElementById("addItemModal").style.display = "none"; /* hide Modal */
     errorMessage.style.display = "none";  /* remove error */
     document.getElementById("itemName").value = ""; /*clear given modal data*/
     document.getElementById("expiryDate").value = "";
@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
       errorMessage.style.display = "block";
       return;
     }
-    let foodItem = {name, description, current, expiry}; // create an object for the item
+    let foodItem = {name, description, current, expiry, uuid}; // create an object for the item
     let foodItems = JSON.parse(localStorage.getItem("foodList")) || []; // load/gets the existing list or creates a new one
     foodItems.push(foodItem);
     localStorage.setItem("foodList", JSON.stringify(foodItems)); // store list in localstorage
     displayItems(); // show current list
-    closeModal();
+    closeAddItemModal();
     console.log(uuid);
   }
   function displayItems() {
@@ -57,9 +57,65 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
             <div><strong>Eingetragen am:</strong> ${formattedCurrentDate}</div>
             <div><strong>Ablaufdatum:</strong> ${formattedExpiryDate}</div>
         `;
+        foodDiv.onclick = () => openEditItemModal(item);
         foodList.appendChild(foodDiv);
     });
   }
+  function openEditItemModal(item) {
+    document.getElementById("editItemModal").style.display = "flex";
+
+    document.getElementById("editItemName").value = item.name;
+    document.getElementById("editCurrentDate").value = item.current; 
+    document.getElementById("editExpiryDate").value = item.expiry;
+    document.getElementById("editDescription").value = item.description;
+
+    // Speichere die UUID im Modal als Attribut
+    document.getElementById("editItemModal").setAttribute("data-uuid", item.uuid);
+  }
+
+  function closeEditItemModal(item){
+    displayItems(); // Zeigt die geänderte Liste an
+    document.getElementById("editItemModal").style.display = "none"; // schließt modal
+
+  }
+  function saveEditedItem() {
+    let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
+    let name = document.getElementById("editItemName").value;
+    let expiry = document.getElementById("editExpiryDate").value;
+    let description = document.getElementById("editDescription").value;
+
+    if (name === "" || expiry === "") {
+        document.getElementById("editErrorMessage").style.display = "block";
+        return;
+    }
+
+    let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
+    
+    // Findet das Item und aktualisiert die Werte
+    let updatedItems = foodItems.map(item => {
+        if (item.uuid === uuid) {
+            return { ...item, name, expiry, description };
+        }
+        return item;
+    });
+
+    localStorage.setItem("foodList", JSON.stringify(updatedItems));
+    displayItems();
+    closeEditItemModal();
+}
+
+  function deleteItem() {
+    let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
+    let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
+  
+     foodItems = foodItems.filter(item => item.uuid !== uuid);
+    localStorage.setItem("foodList", JSON.stringify(foodItems));
+  
+     displayItems();
+    closeEditItemModal();
+  }
+
+
   function formatDate(dateString) {
     if (!dateString) return "-";
     let date = new Date(dateString);
