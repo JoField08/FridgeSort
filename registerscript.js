@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     let loginData = localStorage.getItem("userLoginData");
-    
 
     console.log("Überprüfung...");
 
@@ -16,22 +15,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+function isValidEmail(email) {
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 function saveUserInfo() {
-    let name = document.getElementById("inputName").value.trim(); // .value.trim(); wird verwendet, um den Wert eines Eingabefelds zu holen und dabei Leerzeichen am Anfang und Ende zu entfernen (.trim())
+    let name = document.getElementById("inputName").value.trim();
     let lastName = document.getElementById("inputLastName").value.trim();
     let email = document.getElementById("inputEmail").value.trim();
     let errorMessage = document.getElementById("error-message");
     
-    errorMessage.textContent = ""; // resetting error-message
+    errorMessage.textContent = ""; // Fehlernachricht zurücksetzen
 
     if (name === "" || lastName === "" || email === "") {
-        errorMessage.textContent = "Bitte fülle alle Felder aus um fortzufahren!";
+        errorMessage.textContent = "Bitte fülle alle Felder aus, um fortzufahren!";
+        setTimeout(() => { errorMessage.textContent = ""; }, 2000);
+        return;
+    }
 
-        // Fehlernachricht nach 3 Sekunden ausblenden
-        setTimeout(() => {
-            errorMessage.textContent = "";
-        }, 2000);
-
+    if (!isValidEmail(email)) {
+        errorMessage.textContent = "Bitte eine gültige E-Mail-Adresse eingeben!";
+        setTimeout(() => { errorMessage.textContent = ""; }, 2000);
         return;
     }
 
@@ -41,5 +46,5 @@ function saveUserInfo() {
 
     console.log("Gespeicherte Werte:", JSON.parse(localStorage.getItem("userLoginData")));
 
-    window.location.href = "https://jofield08.github.io/FridgeSort/profile.html"; // Weiterleitung zur Profilseite nach dem Speichern
+    window.location.href = "profile.html"; 
 }
