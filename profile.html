@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dein Profil</title>
+  <!-- <script defer src="registerscript.js"></script> -->
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #1E1E2E;
+      color: #E0E0E0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 100px;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      background-color: #1E1E2E;
+      color: #E0E0E0;
+      padding: 20px 0;
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      text-align: center;
+    }
+    .logo span {
+      color: #50FA7B;
+    }
+
+    .profile-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #282A36;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .profile-container h2, .profile-container p {
+      margin: 10px 0;
+    }
+
+    .nav {
+      width: 100%;
+      background: #1E1E2E;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      height: 55px;
+      box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .nav img {
+      height: 40px;
+      width: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="logo">
+    <h1><span>Fridge</span>Sort</h1>
+  </div>
+
+  <div class="profile-container">
+    <h1 id="welcome">Willkommen, <span id="userName">...</span>!</h1>
+    <h3>Name:</h3> <p id="userNameText">-</p>
+    <h3>Nachname:</h3> <p id="userLastName">-</p>
+    <h3>Geburtstag:</h3> <p id="userBirthdate">-</p>
+    <h3>Email:</h3> <p id="userEmail">-</p>
+  </div>
+
+  <div class="nav">
+    <a href="map.html"><img src="img/taskbar_map.png" alt="Map"></a>
+    <a href="recepies.html"><img src="img/taskbar_book.png" alt="Recipes"></a>
+    <a href="checklist.html"><img src="img/taskbar_checklist.png" alt="Checklist"></a>
+    <a href="shop.html"><img src="img/taskbar_shopping_car.png" alt="Shop"></a>
+    <a href="profile.html"><img src="img/taskbar_profile.png" alt="Profile"></a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let userData = JSON.parse(localStorage.getItem("userLoginData")) || {};
+      
+      document.getElementById("userName").textContent = userData.name || "Unbekannt";
+      document.getElementById("userLastName").textContent = userData.lastName || "-";
+      document.getElementById("userEmail").textContent = userData.email || "-";
+    });
+  </script>
+
+</body>
+</html>
