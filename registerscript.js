@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     } else {
         console.log("Benutzer bereits registriert.");
-        loadUserInfo();
     }
 });
 
