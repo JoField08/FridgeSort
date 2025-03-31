@@ -2,7 +2,12 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
 
   function openAddItemModal() {
       document.getElementById("addItemModal").style.display = "flex";
-      document.getElementById("currentDate").value = new Date().toISOString().split('T')[0];
+      let today = new Date();
+      document.getElementById("currentDate").value = today.toISOString().split('T')[0];
+      
+      let nextWeek = new Date();
+      nextWeek.setDate(today.getDate() + 7);
+      document.getElementById("expiryDate").value = nextWeek.toISOString().split('T')[0];
     }
     
   function closeAddItemModal() {
