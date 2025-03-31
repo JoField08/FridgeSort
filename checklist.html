@@ -146,6 +146,25 @@
       margin-bottom: 10px;
       display: none;
     }
+    .no-items-display-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    }
+
+    .no-items-display-image {
+     max-width: 90%;
+    max-height: 50vh;
+    object-fit: contain;
+     display: none;
+    }
+
+    .no-items-display-text {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    }
     .food-list {
       margin: 20px;
       padding: 10px;
@@ -191,6 +210,11 @@
   </div>
 
   <div class="food-list" id="foodList"></div>
+
+  <div class="no-items-display-container" id="noItemsDisplay">
+    <img src="img/smile.png" class="no-items-display-image" id="noItemDisplayImage">
+    <p class="no-items-display-text">Du hast aktuell keine Lebensmittel zu Hause.</p>
+  </div>
 
   <div class="nav bottom-nav">
     <ul>
@@ -241,6 +265,14 @@
     let foodList = document.getElementById("foodList");
     foodList.innerHTML = "<h2>Aktueller Bestand:</h2>";
     let foodItems = JSON.parse(localStorage.getItem("foodList")) || []; // Lade gespeicherte Items
+
+    if (foodItems.length < 1) {
+    noItemsDisplay.style.display = "flex";
+    noItemDisplayImage.style.display = "block";
+    } else {
+    noItemsDisplay.style.display = "none";
+    noItemDisplayImage.style.display = "none";
+    }
 
     foodItems.forEach(item => {
         let formattedCurrentDate = formatDate(item.current);
