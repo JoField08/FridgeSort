@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Keine Benutzerdaten gefunden.");
         if (!window.location.href.includes("register.html")) {
             console.log("Weiterleitung zur Registrierung.");
-            window.location.href = "window.location.href = "https://jofield08.github.io/FridgeSort/registration/register.html";
+            window.location.href = "window.location.href = "/register.html";
 ";
  
         }
