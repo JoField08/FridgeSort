@@ -119,6 +119,50 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
      displayItems();
     closeEditItemModal();
   }
+  function useItem() {
+  let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
+  console.log("Das Objekt mit der UUID: " + uuid + " wurde benutzt.");
+
+  deleteItem(); // Bestehende Löschlogik
+
+  // Hole oder initialisiere userStatsData
+  let stats = JSON.parse(localStorage.getItem("userStatsData")) || {
+    progress: 0,
+    level: 0,
+    badge: 1,
+    savedItems: 0,
+    highscore: 0,
+    highscoreSince: new Date().toLocaleDateString("de-DE")
+  };
+
+  // Item wurde benutzt → Score erhöhen
+  stats.savedItems += 1;
+
+  // Highscore aktualisieren
+  stats.highscore = stats.savedItems;
+
+  // Fortschritt im aktuellen Level berechnen
+  stats.progress = (stats.savedItems % 10) * 10; // 0–90 in 10er-Schritten
+
+  // Level berechnen (immer 10 Items pro Level)
+  stats.level = Math.floor(stats.savedItems / 10);
+
+  // Optional: Badge-Logik (z. B. alle 5 Level ein neuer Badge)
+  stats.badge = Math.min(10, Math.floor(stats.level / 5) + 1); // max 10
+
+  // Highscore-Datum bleibt wie es war – oder neu setzen, wenn du willst:
+  if (stats.savedItems === 1) {
+    stats.highscoreSince = new Date().toLocaleDateString("de-DE");
+  }
+
+  // Speichern
+  localStorage.setItem("userStatsData", JSON.stringify(stats));
+
+  console.log("Statistiken aktualisiert:", stats);
+  console.table(stats); // schöne tabellarische Ausgabe in der Konsole
+
+}
+
 
 
   function formatDate(dateString) {
