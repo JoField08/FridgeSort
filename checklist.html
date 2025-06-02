@@ -131,14 +131,23 @@
     .modal-content button {
       width: 100%;
       padding: 10px;
-      background-color: #50FA7B;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
     }
-    .modal-content button:hover {
+    .button-green {
+      background-color: #50FA7B;
+    }
+    .button-green:hover {
       background-color: #45e06e;
+    }
+    .button-red {
+     background-color: #FF5555; 
+    }
+
+    .button-red:hover {
+     background-color: #e04b4b; 
     }
     .error-message {
       color: #FF5555;
@@ -205,8 +214,8 @@
 
       <p id="errorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
       
-      <button onclick="saveItem()">Speichern</button>
-      <button onclick="closeAddItemModal()">Abbrechen</button>
+      <button onclick="saveItem()" class="button-green">Speichern</button>
+      <button onclick="closeAddItemModal()" class="button-green">Abbrechen</button>
     </div>
   </div>
 
@@ -228,9 +237,10 @@
 
       <p id="editErrorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
       
-      <button onclick="saveEditedItem()">Speichern</button>
-      <button onclick="deleteItem()">Löschen</button>
-      <button onclick="closeEditItemModal()">Abbrechen</button>
+      <button onclick="saveEditedItem()" class="button-green">Speichern</button>
+      <button onclick="useItem()" class="button-green">Verbrauchen</button>
+      <button onclick="deleteItem()" class="button-red">Löschen</button>
+      <button onclick="closeEditItemModal()" class="button-green">Abbrechen</button>
     </div>
 </div>
 
@@ -254,3 +264,4 @@
   <img src="img/add_button.png" class="imagesize-item-add-button bottom-right-item-add-button" onclick="openAddItemModal()">
 </body>
 </html>
+
