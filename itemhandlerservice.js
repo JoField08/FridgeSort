@@ -144,7 +144,6 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
   let stats = JSON.parse(localStorage.getItem("userStatsData")) || {
     progress: 0,
     level: 0,
-    badge: 1,
     savedItems: 0,
     streak: 0,
     highscore: 0,
@@ -175,7 +174,6 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
   let stats = JSON.parse(localStorage.getItem("userStatsData")) || {
     progress: 0,
     level: 0,
-    badge: 1,
     savedItems: 0,
     highscore: 0,
     streak: 0,
