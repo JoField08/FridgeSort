@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dein Profil</title>
  <script defer src="registerscript.js"></script> 
-  <style>
+<style>
     body {
       margin: 0;
       height: 100vh;
@@ -207,7 +207,7 @@
     <p class="progress-text">70% Ziel erreicht</p>
   </div>
 
-  <div class="stat-grid">
+<div class="stat-grid">
   <div class="stat-item">
     <h3>Gerettete Lebensmittel</h3>
     <p id="savedItems">-</p>
@@ -217,10 +217,15 @@
     <p id="highscore">-</p>
   </div>
   <div class="stat-item">
-    <h3>Highscore seit</h3>
-    <p id="highscoreSince">-</p>
+    <h3>Aktuelle Streak</h3>
+    <p id="streaktreak">-</p>
   </div>
+  <div class="stat-item">
+    <h3>Streak seit</h3>
+    <p id="streakSince">-</p>
   </div>
+</div>
+
 
 
   <div class="image-placeholder">
@@ -268,11 +273,9 @@
     // Statistiken einfügen
     document.getElementById("savedItems").textContent = stats.savedItems ?? "-";
     document.getElementById("highscore").textContent = (stats.highscore ?? "-") + " Punkte";
-    document.getElementById("highscoreSince").textContent = stats.highscoreSince || "-";
+    document.getElementById("streak").textContent = stats.streak ?? "-";
+    document.getElementById("streakSince").textContent = stats.highscoreSince || "-";
   });
 </script>
-
-
 </body>
-
 </html>
