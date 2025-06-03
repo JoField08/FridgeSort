@@ -133,49 +133,84 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
      displayItems();
     closeEditItemModal();
   }
+
+  function throwItem() {
+  let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
+  console.log("Das Objekt mit der UUID: " + uuid + " wurde weggeworfen.");
+  
+  deleteItem();
+
+  // Stats laden oder neu anlegen
+  let stats = JSON.parse(localStorage.getItem("userStatsData")) || {
+    progress: 0,
+    level: 0,
+    badge: 1,
+    savedItems: 0,
+    streak: 0,
+    highscore: 0,
+    streakSince: new Date().toLocaleDateString("de-DE")
+  };
+
+  // streak zurücksetzen
+  stats.streak = 0;
+  stats.streakSince = new Date().toLocaleDateString("de-DE");
+
+  // Optional: Highscore beibehalten oder anpassen, hier bleibt er so wie er ist
+
+  // Speichern
+  localStorage.setItem("userStatsData", JSON.stringify(stats));
+
+  console.log("Statistiken aktualisiert:", stats);
+  console.table(stats);
+}
+
+
   function useItem() {
   let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
   console.log("Das Objekt mit der UUID: " + uuid + " wurde benutzt.");
 
-  deleteItem(); // Bestehende Löschlogik
+  deleteItem(); // Item entfernen
 
-  // Hole oder initialisiere userStatsData
+  // Stats laden oder neu anlegen
   let stats = JSON.parse(localStorage.getItem("userStatsData")) || {
     progress: 0,
     level: 0,
     badge: 1,
     savedItems: 0,
     highscore: 0,
-    highscoreSince: new Date().toLocaleDateString("de-DE")
+    streak: 0,
+    streakSince: new Date().toLocaleDateString("de-DE")
   };
 
-  // Item wurde benutzt → Score erhöhen
+  // 1 zu savedItems addieren
   stats.savedItems += 1;
 
-  // Highscore aktualisieren
-  stats.highscore = stats.savedItems;
+  // streak um 1 erhöhen
+  stats.streak += 1;
 
-  // Fortschritt im aktuellen Level berechnen
-  stats.progress = (stats.savedItems % 10) * 10; // 0–90 in 10er-Schritten
+  // highscore updaten, wenn streak größer ist
+  if (stats.streak > stats.highscore) {
+    stats.highscore = stats.streak;
+    stats.highscoreSince = new Date().toLocaleDateString("de-DE"); // Datum auch aktualisieren
+  }
 
-  // Level berechnen (immer 10 Items pro Level)
+  // Fortschritt im aktuellen Level berechnen (z.B. 10 Items pro Level)
+  stats.progress = (stats.savedItems % 10) * 10; // von 0% bis 90%
+
+  // Level berechnen
   stats.level = Math.floor(stats.savedItems / 10);
 
-  // Optional: Badge-Logik (z. B. alle 5 Level ein neuer Badge)
-  stats.badge = Math.min(10, Math.floor(stats.level / 5) + 1); // max 10
-
-  // Highscore-Datum bleibt wie es war – oder neu setzen, wenn du willst:
-  if (stats.savedItems === 1) {
-    stats.highscoreSince = new Date().toLocaleDateString("de-DE");
-  }
+  // Badge (optional) – alle 5 Level neuer Badge, max. 10
+  stats.badge = Math.min(10, Math.floor(stats.level / 5) + 1);
 
   // Speichern
   localStorage.setItem("userStatsData", JSON.stringify(stats));
 
   console.log("Statistiken aktualisiert:", stats);
-  console.table(stats); // schöne tabellarische Ausgabe in der Konsole
-
+  console.table(stats);
 }
+
+
   function formatDate(dateString) {
     if (!dateString) return "-";
     let date = new Date(dateString);
