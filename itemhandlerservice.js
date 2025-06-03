@@ -176,9 +176,6 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
   console.table(stats); // schöne tabellarische Ausgabe in der Konsole
 
 }
-
-
-
   function formatDate(dateString) {
     if (!dateString) return "-";
     let date = new Date(dateString);
