@@ -6,262 +6,361 @@
   <script defer src="itemhandlerservice.js"></script>
   <script defer src="registerscript.js"></script> 
   <style>
-    body {
-      margin: 0; /* Removes default margin around the page */
-      height: 100vh; /* Makes the body take up the full height of the viewport */
-      background-color: #1E1E2E; /* Dark background color */
-      color: #E0E0E0; /* Light gray text color */
-      display: flex; /* Enables Flexbox layout */
-      flex-direction: column; /* Aligns children vertically */
-      overflow: auto; /* Allows scrolling if content overflows */
-      display: block; /* Prevents body from being restricted to 100vh */
-      padding-bottom: 100px; /* Adds space for the navbar at the bottom */
-      padding-top: 0px; /* Removes any space at the top */
-    }
+        body {
+          margin: 0; /* Removes default margin around the page */
+          height: 100vh; /* Makes the body take up the full height of the viewport */
+          background-color: #1E1E2E; /* Dark background color */
+          color: #E0E0E0; /* Light gray text color */
+          display: flex; /* Enables Flexbox layout */
+          flex-direction: column; /* Aligns children vertically */
+          overflow: auto; /* Allows scrolling if content overflows */
+          display: block; /* Prevents body from being restricted to 100vh */
+          padding-bottom: 100px; /* Adds space for the navbar at the bottom */
+          padding-top: 0px; /* Removes any space at the top */
+        }
 
-    * {
-      padding: 0; /* Removes padding from all elements */
-      margin: 0; /* Removes margin from all elements */
-      box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
-    }
+        * {
+          padding: 0; /* Removes padding from all elements */
+          margin: 0; /* Removes margin from all elements */
+          box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
+        }
 
-    .logo {
-      background-color: #1E1E2E; /* Same color as the body background */
-      color: #E0E0E0; /* Light gray color for the text */
-      text-align: center; /* Centers the text horizontally */
-      padding: 20px 0; /* Adds vertical padding */
-      font-size: 36px; /* Sets large font size for the logo */
-      font-weight: bold; /* Makes the logo text bold */
-      letter-spacing: 2px; /* Adds space between the letters */
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Adds shadow to make the logo pop */
-      z-index: 1000; /* Ensures the logo stays on top */
-    }
-    .logo span {
-      color: #50FA7B; /* Changes the color of the "Sort" part of the logo */
-    }
+        .logo {
+          background-color: #1E1E2E; /* Same color as the body background */
+          color: #E0E0E0; /* Light gray color for the text */
+          text-align: center; /* Centers the text horizontally */
+          padding: 20px 0; /* Adds vertical padding */
+          font-size: 36px; /* Sets large font size for the logo */
+          font-weight: bold; /* Makes the logo text bold */
+          letter-spacing: 2px; /* Adds space between the letters */
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Adds shadow to make the logo pop */
+          z-index: 1000; /* Ensures the logo stays on top */
+        }
+        .logo span {
+          color: #50FA7B; /* Changes the color of the "Sort" part of the logo */
+        }
 
-    .bottom-right-item-add-button {
-      position: fixed; /* Fixes the button at a specific position on the screen */
-      bottom: 100px; /* Positions the button 100px from the bottom */
-      right: 10px; /* Positions the button 10px from the right */
-    }
+        .bottom-right-item-add-button {
+          position: fixed; /* Fixes the button at a specific position on the screen */
+          bottom: 100px; /* Positions the button 100px from the bottom */
+          right: 10px; /* Positions the button 10px from the right */
+        }
 
-    .imagesize-item-add-button {
-      height: 75px; /* Sets the button height */
-    }    
-    .rounded {
-      border-radius: 10px; /* Rounds the corners of elements */
-    }
-    .smallimage {
-      height: 100px; /* Sets height for small images */
-    }
-    .imagesize-icons-taskbar {
-      height: 50px; /* Sets height for taskbar icons */
-    }
-    .modal-content input, .modal-content select, .modal-content button {
-      margin: 10px 0; /* Adds margin around input fields */
-      padding: 10px; /* Adds padding inside input fields */
-      font-size: 16px; /* Sets font size for inputs and buttons */
-    }
+        .imagesize-item-add-button {
+          height: 75px; /* Sets the button height */
+        }
+        .rounded {
+          border-radius: 10px; /* Rounds the corners of elements */
+        }
+        .smallimage {
+          height: 100px; /* Sets height for small images */
+        }
+        .imagesize-icons-taskbar {
+          height: 50px; /* Sets height for taskbar icons */
+        }
+        .modal-content input, .modal-content select, .modal-content button {
+          margin: 10px 0; /* Adds margin around input fields */
+          padding: 10px; /* Adds padding inside input fields */
+          font-size: 16px; /* Sets font size for inputs and buttons */
+        }
 
-    .nav {
-      width: 100%; /* Makes the navbar span the full width */
-      text-align: center; /* Centers navbar items */
-      background: #1E1E2E; /* Matches the page background color */
-      position: fixed; /* Fixes the navbar to the bottom of the screen */
-      left: 0; /* Positions the navbar at the left */
-      bottom: 0; /* Positions the navbar at the bottom */
-      box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
-      z-index: 1000; /* Ensures navbar stays on top */
-      height: 55px; /* Sets navbar height */
-    }
+        .nav {
+          width: 100%; /* Makes the navbar span the full width */
+          text-align: center; /* Centers navbar items */
+          background: #1E1E2E; /* Matches the page background color */
+          position: fixed; /* Fixes the navbar to the bottom of the screen */
+          left: 0; /* Positions the navbar at the left */
+          bottom: 0; /* Positions the navbar at the bottom */
+          box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
+          z-index: 1000; /* Ensures navbar stays on top */
+          height: 55px; /* Sets navbar height */
+        }
 
-    .nav ul {
-      list-style-type: none; /* Removes bullets from list items */
-      padding: 0; /* Removes padding */
-      margin: 0; /* Removes margin */
-      display: flex; /* Enables Flexbox layout */
-      justify-content: space-evenly; /* Distributes navbar items evenly */
-      width: 100%; /* Makes the navbar span the full width */
-      height: 100%; /* Ensures icons fill the navbar */
-    }
+        .nav ul {
+          list-style-type: none; /* Removes bullets from list items */
+          padding: 0; /* Removes padding */
+          margin: 0; /* Removes margin */
+          display: flex; /* Enables Flexbox layout */
+          justify-content: space-evenly; /* Distributes navbar items evenly */
+          width: 100%; /* Makes the navbar span the full width */
+          height: 100%; /* Ensures icons fill the navbar */
+        }
 
-    .nav ul li {
-      display: inline-block; /* Displays list items inline */
-    }
+        .nav ul li {
+          display: inline-block; /* Displays list items inline */
+        }
 
-    .nav ul li .nav-link {
-      text-decoration: none; /* Removes underline from links */
-      color: #ccc; /* Sets link color */
-      padding: 15px; /* Adds padding around the links */
-      display: block; /* Makes links block elements */
-    }
-    .content-centered{
-      text-align: center;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1001;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: #282a36;
+        .nav ul li .nav-link {
+          text-decoration: none; /* Removes underline from links */
+          color: #ccc; /* Sets link color */
+          padding: 15px; /* Adds padding around the links */
+          display: block; /* Makes links block elements */
+        }
+        .content-centered{
+          text-align: center;
+        }
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1001;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;
+        }
+        .modal-content {
+          background-color: #282a36;
+          padding: 20px;
+          border-radius: 8px;
+          width: 300px;
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        .modal-content label, .modal-content input, .modal-content textarea {
+          display: block;
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        .modal-content input, .modal-content textarea {
+          padding: 8px;
+          border: none;
+          border-radius: 5px;
+        }
+        .modal-content button {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+        .button-green {
+          background-color: #50FA7B;
+        }
+        .button-green:hover {
+          background-color: #45e06e;
+        }
+        .button-red {
+         background-color: #FF5555;
+        }
+
+        .button-red:hover {
+         background-color: #e04b4b;
+        }
+        .error-message {
+          color: #FF5555;
+          font-size: 15px;
+          text-align: left;
+          margin-bottom: 10px;
+          display: none;
+        }
+        .no-items-display-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        }
+
+        .no-items-display-image {
+         max-width: 90%;
+        max-height: 50vh;
+        object-fit: contain;
+         display: none;
+        }
+
+        .no-items-display-text {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        }
+        .food-list {
+          margin: 20px;
+          padding: 10px;
+          padding-bottom: 60px;
+          overflow-y: auto; /* activate scrolling when there are to many items */
+        }
+        .food-item {
+      background: linear-gradient(145deg, #323247, #292A3A);
       padding: 20px;
-      border-radius: 8px;
-      width: 300px;
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-    }
-    .modal-content label, .modal-content input, .modal-content textarea {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .modal-content input, .modal-content textarea {
-      padding: 8px;
-      border: none;
-      border-radius: 5px;
-    }
-    .modal-content button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 15px rgba(80, 250, 123, 0.3);
+      color: #E0E0E0;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      font-size: 16px;
-    }
-    .button-green {
-      background-color: #50FA7B;
-    }
-    .button-green:hover {
-      background-color: #45e06e;
-    }
-    .button-red {
-     background-color: #FF5555; 
+      border: 1.5px solid transparent;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
-    .button-red:hover {
-     background-color: #e04b4b; 
-    }
-    .error-message {
-      color: #FF5555;
-      font-size: 15px;
-      text-align: left;
-      margin-bottom: 10px;
-      display: none;
-    }
-    .no-items-display-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    .food-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(80, 250, 123, 0.5);
+      border: 1.5px solid #50FA7B;
     }
 
-    .no-items-display-image {
-     max-width: 90%;
-    max-height: 50vh;
-    object-fit: contain;
-     display: none;
+    /* Linker Bereich mit Name und Beschreibung */
+    .food-item .left-section {
+      flex: 1 1 60%;
+      min-width: 200px;
     }
 
-    .no-items-display-text {
-    margin-top: 10px;
-    font-size: 1.2rem;
+    .food-item h3 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1.2px;
+      color: #50FA7B;
+      margin-bottom: 8px;
     }
-    .food-list {
-      margin: 20px;
-      padding: 10px;
-      padding-bottom: 60px;
-      overflow-y: auto; /* activate scrolling when there are to many items */
+
+    .food-item p {
+      font-size: 1rem;
+      line-height: 1.3;
+      color: #C0C0C0;
+      font-style: italic;
     }
-    .food-item {
-      background-color: #282a36;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+
+    /* Rechter Bereich mit Daten */
+    .food-item .right-section {
+      flex: 1 1 35%;
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: #A0A0A0;
     }
-  </style>
+
+    /* Daten-Labels fett */
+    .food-item .right-section div strong {
+      color: #50FA7B;
+    }
+
+    /* Responsive: Auf kleinen Bildschirmen alles untereinander */
+    @media (max-width: 600px) {
+      .food-item {
+        flex-direction: column;
+      }
+      .food-item .left-section, .food-item .right-section {
+        flex: 1 1 100%;
+        min-width: unset;
+      }
+    }
+
+    .inventory-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #50FA7B; /* Frische grüne Farbe passend zum Logo */
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin: 20px 0 10px 0;
+    }
+
+    .inventory-icon {
+      height: 28px;
+      filter: brightness(0) invert(1); /* Weißes Icon für dunklen Hintergrund */
+    }
+
+    .inventory-header hr {
+      flex-grow: 1;
+      border: none;
+      border-bottom: 1.5px solid #50FA7B;
+      margin-left: 15px;
+      opacity: 0.3;
+    }
+
+    </style>
 </head>
- 
+
 <body>
 
-  <div class="logo">
+<div class="logo">
     <h1><span>Fridge</span>Sort</h1> <!-- Logo text -->
-  </div>
+</div>
 
-  <div id="addItemModal" class="modal">
+<div class="inventory-header">
+    <!-- <img src="img/fridge_icon.svg" alt="Bestand Icon" class="inventory-icon" /> -->
+    <h2>Aktueller Bestand</h2>
+    <hr/>
+</div>
+
+
+<div id="addItemModal" class="modal">
     <div class="modal-content">
-      <h2>Neues Lebensmittel</h2>
-      <label for="itemName">Lebensmittel:</label>
-      <input type="text" id="itemName" placeholder="Name eingeben">
-      
-      <label for="currentDate">Aktuelles Datum:</label>
-      <input type="date" id="currentDate" readonly>
-      
-      <label for="expiryDate">Ablaufdatum:</label>
-      <input type="date" id="expiryDate">
-      
-      <label for="description">Beschreibung:</label>
-      <textarea id="description" placeholder="Beschreibung hinzufügen"></textarea>
+        <h2>Neues Lebensmittel</h2>
+        <label for="itemName">Lebensmittel:</label>
+        <input type="text" id="itemName" placeholder="Name eingeben">
 
-      <p id="errorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
-      
-      <button onclick="saveItem()" class="button-green">Speichern</button>
-      <button onclick="closeAddItemModal()" class="button-green">Abbrechen</button>
+        <label for="currentDate">Aktuelles Datum:</label>
+        <input type="date" id="currentDate" readonly>
+
+        <label for="expiryDate">Ablaufdatum:</label>
+        <input type="date" id="expiryDate">
+
+        <label for="description">Beschreibung:</label>
+        <textarea id="description" placeholder="Beschreibung hinzufügen"></textarea>
+
+        <p id="errorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
+
+        <button onclick="saveItem()" class="button-green">Speichern</button>
+        <button onclick="closeAddItemModal()" class="button-green">Abbrechen</button>
     </div>
-  </div>
+</div>
 
-  <div id="editItemModal" class="modal">
+<div id="editItemModal" class="modal">
     <div class="modal-content">
-      <h2>Lebensmittel bearbeiten</h2>
-      
-      <label for="editItemName">Lebensmittel:</label>
-      <input type="text" id="editItemName" placeholder="Name eingeben">
-      
-      <label for="editCurrentDate">Datum des Eintrages:</label>
-      <input type="date" id="editCurrentDate" readonly>
-      
-      <label for="editExpiryDate">Ablaufdatum:</label>
-      <input type="date" id="editExpiryDate">
-      
-      <label for="editDescription">Beschreibung:</label>
-      <textarea id="editDescription" placeholder="Beschreibung hinzufügen"></textarea>
+        <h2>Lebensmittel bearbeiten</h2>
 
-      <p id="editErrorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
-      
-      <button onclick="saveEditedItem()" class="button-green">Speichern</button>
-      <button onclick="useItem()" class="button-green">Verbrauchen</button>
-      <button onclick="deleteItem()" class="button-red">Löschen</button>
-      <button onclick="closeEditItemModal()" class="button-green">Abbrechen</button>
+        <label for="editItemName">Lebensmittel:</label>
+        <input type="text" id="editItemName" placeholder="Name eingeben">
+
+        <label for="editCurrentDate">Datum des Eintrages:</label>
+        <input type="date" id="editCurrentDate" readonly>
+
+        <label for="editExpiryDate">Ablaufdatum:</label>
+        <input type="date" id="editExpiryDate">
+
+        <label for="editDescription">Beschreibung:</label>
+        <textarea id="editDescription" placeholder="Beschreibung hinzufügen"></textarea>
+
+        <p id="editErrorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
+
+        <button onclick="saveEditedItem()" class="button-green">Speichern</button>
+        <button onclick="useItem()" class="button-green">Verbrauchen</button>
+        <button onclick="deleteItem()" class="button-red">Löschen</button>
+        <button onclick="closeEditItemModal()" class="button-green">Abbrechen</button>
     </div>
 </div>
 
 
-  <div class="food-list" id="foodList"></div>
+<div class="food-list" id="foodList"></div>
 
-  <div class="no-items-display-container" id="noItemsDisplay">
-    <img src="img/sad-face.png" class="no-items-display-image" id="noItemDisplayImage">
-    <p class="no-items-display-text">Du hast aktuell keine Lebensmittel zu Hause.</p>
-  </div>
+<!--
+<div class="no-items-display-container" id="noItemsDisplay">
+  <img src="img/sad-face.png" class="no-items-display-image" id="noItemDisplayImage">
+  <p class="no-items-display-text">Du hast aktuell keine Lebensmittel zu Hause.</p>
+</div>
+-->
 
-  <div class="nav bottom-nav">
+<div class="nav bottom-nav">
     <ul>
-      <li><a href="map.html"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="recepies.html"><img src="img/taskbar_book.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="checklist.html"><img src="img/taskbar_checklist.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="shop.html"><img src="img/taskbar_shopping_car.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="profile.html"><img src="img/taskbar_profile.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="map.html"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="recepies.html"><img src="img/taskbar_book.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="checklist.html"><img src="img/taskbar_checklist.png" class="rounded imagesize-icons-taskbar"></a>
+        </li>
+        <li><a href="shop.html"><img src="img/taskbar_shopping_car.png" class="rounded imagesize-icons-taskbar"></a>
+        </li>
+        <li><a href="profile.html"><img src="img/taskbar_profile.png" class="rounded imagesize-icons-taskbar"></a></li>
     </ul>
-  </div>  
-  <img src="img/add_button.png" class="imagesize-item-add-button bottom-right-item-add-button" onclick="openAddItemModal()">
+</div>
+<img src="img/add_button.png" class="imagesize-item-add-button bottom-right-item-add-button"
+     onclick="openAddItemModal()">
 </body>
 </html>
-
