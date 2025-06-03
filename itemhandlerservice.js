@@ -38,34 +38,48 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
     console.log(uuid);
   }
   function displayItems() {
-    let foodList = document.getElementById("foodList");
-    foodList.innerHTML = "<h2>Aktueller Bestand:</h2>";
-    let foodItems = JSON.parse(localStorage.getItem("foodList")) || []; // Lade gespeicherte Items
+  let foodList = document.getElementById("foodList");
+  foodList.innerHTML = ""; // Liste leeren
+  let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
 
-    if (foodItems.length < 1) {
-    noItemsDisplay.style.display = "flex";
-    noItemDisplayImage.style.display = "block";
-    } else {
-    noItemsDisplay.style.display = "none";
-    noItemDisplayImage.style.display = "none";
-    }
+  if (foodItems.length < 1) {
+    // Wenn keine Items da sind, füge eine freundliche Nachricht ein
+    let noItemsMessage = document.createElement("div");
+    noItemsMessage.style.textAlign = "center";
+    noItemsMessage.style.padding = "40px 20px";
+    noItemsMessage.style.color = "#50FA7B"; // grüne Farbe passend zum Design
+    noItemsMessage.style.fontSize = "1.4rem";
+    noItemsMessage.style.fontStyle = "italic";
+    noItemsMessage.innerHTML = `Keine Lebensmittel im Haus 🥶<br> Zeit zum Einkaufen! 🛒`;
+    noItemsMessage.onclick = () => {
+    window.location.href = "shop.html";
+    }    
 
+    foodList.appendChild(noItemsMessage);
+  } else {
     foodItems.forEach(item => {
-        let formattedCurrentDate = formatDate(item.current);
-        let formattedExpiryDate = formatDate(item.expiry);
+      let formattedCurrentDate = formatDate(item.current);
+      let formattedExpiryDate = formatDate(item.expiry);
 
-        let foodDiv = document.createElement("div");
-        foodDiv.classList.add("food-item");
-        foodDiv.innerHTML = `
-            <h3><big>${item.name}</big></h3>
-            ${item.description ? `<p>${item.description}</p>` : ""}
-            <div><strong>Eingetragen am:</strong> ${formattedCurrentDate}</div>
-            <div><strong>Ablaufdatum:</strong> ${formattedExpiryDate}</div>
-        `;
-        foodDiv.onclick = () => openEditItemModal(item);
-        foodList.appendChild(foodDiv);
+      let foodDiv = document.createElement("div");
+      foodDiv.classList.add("food-item");
+      foodDiv.innerHTML = `
+        <div class="left-section">
+          <h3><big>${item.name}</big></h3>
+          ${item.description ? `<p>${item.description}</p>` : ""}
+        </div>
+        <div class="right-section">
+          <div><strong>Eingetragen am:</strong> ${formattedCurrentDate}</div>
+          <div><strong>Ablaufdatum:</strong> ${formattedExpiryDate}</div>
+        </div>
+      `;
+
+      foodDiv.onclick = () => openEditItemModal(item);
+      foodList.appendChild(foodDiv);
     });
   }
+}
+
   function openEditItemModal(item) {
     document.getElementById("editItemModal").style.display = "flex";
 
