@@ -1,47 +1,104 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dein Profil</title>
- <script defer src="registerscript.js"></script> 
-<style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background-color: #1E1E2E;
-      color: #E0E0E0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding-bottom: 100px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dein Profil</title>
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-
-    .logo {
-      background-color: #1E1E2E;
-      color: #E0E0E0;
-      padding: 20px 0;
-      font-size: 36px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      text-align: center;
-    }
-
-    .logo span {
-      color: #50FA7B;
-    }
-
-    .profile-container {
+    <style>
+        body {
+          margin: 0;
+          height: 100vh;
+          background-color: #1E1E2E;
+          color: #E0E0E0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding-bottom: 100px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    
+        * {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+        }
+    
+        .logo {
+          background-color: #1E1E2E;
+          color: #E0E0E0;
+          padding: 20px 0;
+          font-size: 36px;
+          font-weight: bold;
+          letter-spacing: 2px;
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+          width: 100%;
+          text-align: center;
+        }
+    
+        .logo span {
+          color: #50FA7B;
+        }
+    
+        .profile-container {
+          margin-top: 30px;
+          padding: 30px;
+          background-color: #282A36;
+          border-radius: 20px;
+          width: 90%;
+          max-width: 450px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+          transition: all 0.3s ease;
+        }
+    
+        .profile-container h1 {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: #50FA7B;
+        }
+    
+        .profile-container h3 {
+          margin: 20px 0 5px;
+          font-size: 16px;
+          color: #A4A4A4;
+          font-weight: normal;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+    
+        .profile-container p {
+          margin-bottom: 10px;
+          font-size: 18px;
+          font-weight: 500;
+          color: #E0E0E0;
+        }
+    
+        .profile-container hr {
+          border: none;
+          height: 1px;
+          background-color: #444;
+          margin: 15px 0;
+        }
+    
+        .nav {
+          width: 100%;
+          background: #1E1E2E;
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          height: 55px;
+          box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2);
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+    
+        .nav img {
+          height: 40px;
+          width: 40px;
+        }
+        .stats-container {
       margin-top: 30px;
       padding: 30px;
       background-color: #282A36;
@@ -49,139 +106,82 @@
       width: 90%;
       max-width: 450px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
+      text-align: center;
     }
-
-    .profile-container h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
+    
+    .stats-container h2 {
       color: #50FA7B;
+      margin-bottom: 20px;
     }
-
-    .profile-container h3 {
-      margin: 20px 0 5px;
+    
+    .progress-wrapper {
+      margin-bottom: 20px;
+    }
+    
+    .progress-bar {
+      height: 20px;
+      width: 100%;
+      background-color: #444;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: #50FA7B;
+      transition: width 0.3s ease;
+    }
+    
+    .progress-text {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #CCC;
+    }
+    
+    .stat-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .stat-item h3 {
+      margin-bottom: 5px;
       font-size: 16px;
       color: #A4A4A4;
-      font-weight: normal;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    .profile-container p {
-      margin-bottom: 10px;
+    
+    .stat-item p {
       font-size: 18px;
       font-weight: 500;
       color: #E0E0E0;
     }
-
-    .profile-container hr {
-      border: none;
-      height: 1px;
-      background-color: #444;
-      margin: 15px 0;
-    }
-
-    .nav {
-      width: 100%;
-      background: #1E1E2E;
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      height: 55px;
-      box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2);
+    
+    .image-placeholder {
+      margin-top: 20px;
+      height: 120px;
+      border: 2px dashed #555;
+      border-radius: 10px;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
+      color: #777;
+      font-style: italic;
     }
 
-    .nav img {
-      height: 40px;
-      width: 40px;
-    }
-    .stats-container {
-  margin-top: 30px;
-  padding: 30px;
-  background-color: #282A36;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 450px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
-
-.stats-container h2 {
-  color: #50FA7B;
-  margin-bottom: 20px;
-}
-
-.progress-wrapper {
-  margin-bottom: 20px;
-}
-
-.progress-bar {
-  height: 20px;
-  width: 100%;
-  background-color: #444;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.progress-fill {
-  height: 100%;
-  background-color: #50FA7B;
-  transition: width 0.3s ease;
-}
-
-.progress-text {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #CCC;
-}
-
-.stat-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.stat-item h3 {
-  margin-bottom: 5px;
-  font-size: 16px;
-  color: #A4A4A4;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.stat-item p {
-  font-size: 18px;
-  font-weight: 500;
-  color: #E0E0E0;
-}
-
-.image-placeholder {
-  margin-top: 20px;
-  height: 120px;
-  border: 2px dashed #555;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #777;
-  font-style: italic;
-}
-
-  </style>
+    </style>
 </head>
 
 <body>
 
-  <div class="logo">
+<div class="logo">
     <h1><span>Fridge</span>Sort</h1>
-  </div>
+</div>
 
-  <div class="profile-container">
+<div class="profile-container">
     <h1 id="welcome">Herzlich Willkommen, <span id="userNameFirst">...</span>!</h1>
     <hr>
     <h3>Name</h3>
@@ -192,90 +192,86 @@
 
     <h3>Email</h3>
     <p id="userEmail">-</p>
-  </div>
-  <!-- Füge diesen Kasten unterhalb des bestehenden .profile-container ein -->
+</div>
+<!-- Füge diesen Kasten unterhalb des bestehenden .profile-container ein -->
 
 
 <!-- {aktuelle%, Level (int), badge (1-10), gerettete Lebensmittel, highscore, highscore seit} -->
 <div class="stats-container">
-  <h2>Deine Statistiken</h2>
+    <h2>Deine Statistiken</h2>
 
-  <div class="progress-wrapper">
-    <div class="progress-bar">
-      <div class="progress-fill" style="width: 70%;"></div> <!-- 70% als Beispiel -->
+    <div class="progress-wrapper">
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 70%;"></div> <!-- 70% als Beispiel -->
+        </div>
+        <p class="progress-text">70% Ziel erreicht</p>
     </div>
-    <p class="progress-text">70% Ziel erreicht</p>
-  </div>
 
-<div class="stat-grid">
-  <div class="stat-item">
-    <h3>Gerettete Lebensmittel</h3>
-    <p id="savedItems">-</p>
-  </div>
-  <div class="stat-item">
-    <h3>Highscore</h3>
-    <p id="highscore">-</p>
-  </div>
-  <div class="stat-item">
-    <h3>Aktuelle Streak</h3>
-    <p id="streaktreak">-</p>
-  </div>
-  <div class="stat-item">
-    <h3>Streak seit</h3>
-    <p id="streakSince">-</p>
-  </div>
+    <div class="stat-grid">
+        <div class="stat-item">
+            <h3>Gerettete Lebensmittel</h3>
+            <p id="savedItems">-</p>
+        </div>
+        <div class="stat-item">
+            <h3>Highscore</h3>
+            <p id="highscore">-</p>
+        </div>
+        <div class="stat-item">
+            <h3>Aktuelle Streak</h3>
+            <p id="streak">-</p>
+        </div>
+        <div class="stat-item">
+            <h3>Streak seit</h3>
+            <p id="streakSince">-</p>
+        </div>
+    </div>
+    <div class="image-placeholder">
+        <!-- Bild wird hier später eingefügt -->
+        <p>[Bild kommt hier hin]</p>
+    </div>
 </div>
-
-
-
-  <div class="image-placeholder">
-    <!-- Bild wird hier später eingefügt -->
-    <p>[Bild kommt hier hin]</p>
-  </div>
-</div>
-
-
-  <div class="nav">
+<div class="nav">
     <a href="map.html"><img src="img/taskbar_map.png" alt="Map"></a>
     <a href="recepies.html"><img src="img/taskbar_book.png" alt="Recipes"></a>
     <a href="checklist.html"><img src="img/taskbar_checklist.png" alt="Checklist"></a>
     <a href="shop.html"><img src="img/taskbar_shopping_car.png" alt="Shop"></a>
     <a href="profile.html"><img src="img/taskbar_profile.png" alt="Profile"></a>
-  </div>
+</div>
 
- <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Lade User-Daten
-    const userData = JSON.parse(localStorage.getItem("userLoginData")) || {};
-    document.getElementById("userNameFirst").textContent = userData.name || "-";
-    document.getElementById("userName").textContent = userData.name || "-";
-    document.getElementById("userLastName").textContent = userData.lastName || "-";
-    document.getElementById("userEmail").textContent = userData.email || "-";
-
-    // Lade Statistik-Daten
-    const stats = JSON.parse(localStorage.getItem("userStatsData")) || {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Lade User-Daten
+      const userData = JSON.parse(localStorage.getItem("userLoginData")) || {};
+      document.getElementById("userNameFirst").textContent = userData.name || "-";
+      document.getElementById("userName").textContent = userData.name || "-";
+      document.getElementById("userLastName").textContent = userData.lastName || "-";
+      document.getElementById("userEmail").textContent = userData.email || "-";
+  
+      // Lade Statistik-Daten
+      const stats = JSON.parse(localStorage.getItem("userStatsData")) || {
       progress: 0,
       level: 0,
       badge: 1,
       savedItems: 0,
+      streak: 0,
       highscore: 0,
-      highscoreSince: "-"
+      streakSince: new Date().toLocaleDateString("de-DE")
     };
-
-    // Fortschrittsbalken aktualisieren
-    const progressFill = document.querySelector(".progress-fill");
-    const progressText = document.querySelector(".progress-text");
-    const percent = Math.min(parseInt(stats.progress) || 0, 100); // Falls nicht vorhanden
-
-    progressFill.style.width = `${percent}%`;
-    progressText.textContent = `${percent}% · Level ${stats.level}`;
-
-    // Statistiken einfügen
-    document.getElementById("savedItems").textContent = stats.savedItems ?? "-";
-    document.getElementById("highscore").textContent = (stats.highscore ?? "-") + " Punkte";
-    document.getElementById("streak").textContent = stats.streak ?? "-";
-    document.getElementById("streakSince").textContent = stats.highscoreSince || "-";
-  });
+  
+      // Fortschrittsbalken aktualisieren
+      const progressFill = document.querySelector(".progress-fill");
+      const progressText = document.querySelector(".progress-text");
+      const percent = Math.min(parseInt(stats.progress) || 0, 100); // Falls nicht vorhanden
+  
+      progressFill.style.width = `${percent}%`;
+      progressText.textContent = `${percent}% · Level ${stats.level}`;
+  
+      // Statistiken einfügen
+      document.getElementById("savedItems").textContent = stats.savedItems ?? "-";
+      document.getElementById("highscore").textContent = (stats.highscore ?? "-");
+      document.getElementById("streak").textContent = stats.streak ?? "-";
+      document.getElementById("streakSince").textContent = stats.streakSince || "-";
+    });
 </script>
 </body>
 </html>
