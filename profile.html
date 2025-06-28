@@ -176,6 +176,56 @@
     .badge-display img:hover {
       transform: scale(1.05);
     }
+    .file-label {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: #50FA7B;
+  color: #1E1E2E;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-label:hover {
+  background-color: #45e06e;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#fileNameDisplay {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #7CFCB5;
+  font-style: italic;
+}
+
+button#importBtn, button#exportBtn {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  background-color: #50FA7B;
+  color: #1E1E2E;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button#importBtn:hover, button#exportBtn:hover {
+  background-color: #45e06e;
+}
+
+#status {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #A0FFA0;
+}
+
   </style>
 </head>
 <body>
@@ -231,6 +281,21 @@
     <img id="badgeImage" src="img/badge_unavailable.png" alt="" />
   </div>
 </div>
+
+<div class="stats-container">
+  <h2>Daten Import / Export</h2>
+  
+  <button id="exportBtn">Daten exportieren</button>
+
+  <label for="importFile" class="file-label">Datei auswählen</label>
+  <input type="file" id="importFile" accept=".json" />
+  <div id="fileNameDisplay"></div>
+
+  <button id="importBtn">Daten importieren</button>
+
+  <div id="status"></div>
+</div>
+
 
 <div class="nav">
   <a href="https://www.google.com/maps/search/Geöffnete+Supermärkte+in+meiner+Nähe"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a>
@@ -292,6 +357,66 @@
     badgeImg.src = `img/badge_${badgeNumber}.png`;
     badgeImg.alt = `Badge ${badgeNumber}`;
   });
+
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+  const data = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    data[key] = localStorage.getItem(key);
+  }
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'fridgesort-data-export.json';
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importFile').addEventListener('change', (event) => {
+  const fileNameDisplay = document.getElementById('fileNameDisplay');
+  const file = event.target.files[0];
+  if (file) {
+    fileNameDisplay.textContent = `Ausgewählte Datei: ${file.name}`;
+  } else {
+    fileNameDisplay.textContent = '';
+  }
+});
+
+document.getElementById('importBtn').addEventListener('click', () => {
+  const fileInput = document.getElementById('importFile');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert('Bitte eine JSON-Datei auswählen.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      const importedData = JSON.parse(event.target.result);
+      let addedCount = 0;
+
+      for (const key in importedData) {
+        if (!localStorage.getItem(key)) {
+          localStorage.setItem(key, importedData[key]);
+          addedCount++;
+        }
+      }
+
+      document.getElementById('status').innerText = `${addedCount} neue Einträge importiert.`;
+    } catch (err) {
+      alert('Fehler beim Importieren der Datei: ' + err.message);
+    }
+  };
+
+  reader.readAsText(file);
+});
 </script>
 </body>
 </html>
