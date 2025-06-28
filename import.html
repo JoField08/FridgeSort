@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FridgeSort Import/Export</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #1E1E2E;
+      color: #E0E0E0;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      color: #50FA7B;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      letter-spacing: 1.5px;
+    }
+
+    .container {
+      background-color: #282a36;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(80, 250, 123, 0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    button, .file-label {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #50FA7B;
+      color: #1E1E2E;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      text-align: center;
+    }
+
+    button:hover, .file-label:hover {
+      background-color: #45e06e;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #fileNameDisplay {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #A0FFA0;
+    }
+
+    #status {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: #A0FFA0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Fridge<span style="color:#fff;">Sort</span> Import/Export</h1>
+
+  <div class="container">
+    <button id="exportBtn">Daten exportieren</button>
+
+    <label for="importFile" class="file-label">Datei auswählen</label>
+    <input type="file" id="importFile" accept=".json" />
+    <div id="fileNameDisplay"></div>
+
+    <button id="importBtn">Daten importieren</button>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const data = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        data[key] = localStorage.getItem(key);
+      }
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'fridgesort-data-export.json';
+      a.click();
+
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('importFile').addEventListener('change', (event) => {
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const file = event.target.files[0];
+      if (file) {
+        fileNameDisplay.textContent = `Ausgewählte Datei: ${file.name}`;
+      } else {
+        fileNameDisplay.textContent = '';
+      }
+    });
+
+    document.getElementById('importBtn').addEventListener('click', () => {
+      const fileInput = document.getElementById('importFile');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert('Bitte eine JSON-Datei auswählen.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        try {
+          const importedData = JSON.parse(event.target.result);
+          let addedCount = 0;
+
+          for (const key in importedData) {
+            if (!localStorage.getItem(key)) {
+              localStorage.setItem(key, importedData[key]);
+              addedCount++;
+            }
+          }
+
+          document.getElementById('status').innerText = `${addedCount} neue Einträge importiert.`;
+        } catch (err) {
+          alert('Fehler beim Importieren der Datei: ' + err.message);
+        }
+      };
+
+      reader.readAsText(file);
+    });
+  </script>
+</body>
+</html>
