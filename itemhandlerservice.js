@@ -41,7 +41,10 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
   let foodList = document.getElementById("foodList");
   foodList.innerHTML = ""; // Liste leeren
   let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
+  //sort after expiry
+  foodItems.sort((a, b) => new Date(a.expiry) - new Date(b.expiry)); 
 
+    
   if (foodItems.length < 1) {
     // Wenn keine Items da sind, füge eine freundliche Nachricht ein
     let noItemsMessage = document.createElement("div");
