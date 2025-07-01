@@ -4,7 +4,6 @@
   <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page responsive on mobile devices -->
   <script defer src="itemhandlerservice.js"></script>
-  <script defer src="registerscript.js"></script> 
   <style>
         body {
           margin: 0; /* Removes default margin around the page */
@@ -283,6 +282,59 @@
       opacity: 0.3;
     }
 
+        .toggle-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+
+  color: #E0E0E0;
+  gap: 10px;
+}
+ 
+.toggle-switch {
+  position: relative;
+  display: flex;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #646161;
+  transition: 0.4s;
+  border-radius: 24px;
+  width: 50px; /* ← NEU */
+}
+
+ 
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; /* Slightly smaller than the slider height */
+  width: 20px; /* Same as height for a perfect circle */
+  left: 2px; /* Small padding from the left for the initial position */
+  top: 2px; /* Small padding from the top */
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+ 
+.toggle-switch input:checked + .slider {
+  background-color: #50FA7B;
+}
+ 
+.toggle-switch input:checked + .slider:before {
+  transform: translateX(26px); /* Adjusted to slide all the way to the end */
+}
+
     </style>
 </head>
 
@@ -313,6 +365,14 @@
 
         <label for="description">Beschreibung:</label>
         <textarea id="description" placeholder="Beschreibung hinzufügen"></textarea>
+<span>Automatisch zur Einkaufsliste nach Verbrauch</span>
+
+   <div class="toggle-container">
+  <label class="toggle-switch">
+    <input type="checkbox" id="addAutoShop">
+    <span class="slider"></span>
+  </label>
+  </div>
 
         <p id="errorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
 
@@ -337,6 +397,15 @@
         <label for="editDescription">Beschreibung:</label>
         <textarea id="editDescription" placeholder="Beschreibung hinzufügen"></textarea>
 
+<span>Automatisch zur Einkaufsliste nach Verbrauch</span>
+
+    <div class="toggle-container">
+  <label class="toggle-switch">
+    <input type="checkbox" id="editAddAutoShop">
+    <span class="slider"></span>
+  </label>
+  </div>
+  
         <p id="editErrorMessage" class="error-message">Bitte alle erforderlichen Felder ausfüllen!</p>
 
         <button onclick="saveEditedItem()" class="button-green">Speichern</button>
