@@ -16,27 +16,39 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
     document.getElementById("itemName").value = ""; /*clear given modal data*/
     document.getElementById("expiryDate").value = "";
     document.getElementById("description").value = "";
+    document.getElementById("addAutoShop").checked = false;
   }
     
-  function saveItem() {
-    let name = document.getElementById("itemName").value;
-    let expiry = document.getElementById("expiryDate").value;
-    let current = document.getElementById("currentDate").value;
-    let description = document.getElementById("description").value;
-    const uuid = crypto.randomUUID();
+function saveItem() {
+  let name = document.getElementById("itemName").value;
+  let expiry = document.getElementById("expiryDate").value;
+  let current = document.getElementById("currentDate").value;
+  let description = document.getElementById("description").value;
+  let autoShop = document.getElementById("addAutoShop").checked; // NEU: Checkbox-Wert
+  const uuid = crypto.randomUUID();
 
-    if (name === "" || expiry === "") {
-      errorMessage.style.display = "block";
-      return;
-    }
-    let foodItem = {name, description, current, expiry, uuid}; // create an object for the item
-    let foodItems = JSON.parse(localStorage.getItem("foodList")) || []; // load/gets the existing list or creates a new one
-    foodItems.push(foodItem);
-    localStorage.setItem("foodList", JSON.stringify(foodItems)); // store list in localstorage
-    displayItems(); // show current list
-    closeAddItemModal();
-    console.log(uuid);
+  if (name === "" || expiry === "") {
+    document.getElementById("errorMessage").style.display = "block";
+    return;
   }
+
+  let foodItem = {
+    name,
+    description,
+    current,
+    expiry,
+    autoShop, // NEU: Checkbox-Wert mit ins Objekt speichern
+    uuid
+  };
+
+  let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
+  foodItems.push(foodItem);
+  localStorage.setItem("foodList", JSON.stringify(foodItems));
+
+  displayItems();
+  closeAddItemModal();
+}
+
   function displayItems() {
   let foodList = document.getElementById("foodList");
   foodList.innerHTML = ""; // Liste leeren
@@ -74,6 +86,7 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
         <div class="right-section">
           <div><strong>Eingetragen am:</strong> ${formattedCurrentDate}</div>
           <div><strong>Ablaufdatum:</strong> ${formattedExpiryDate}</div>
+          <div><strong>Auto-Einkauf:</strong> ${item.autoShop ? "Ja" : "Nein"}</div>
         </div>
       `;
 
@@ -90,6 +103,7 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
     document.getElementById("editCurrentDate").value = item.current; 
     document.getElementById("editExpiryDate").value = item.expiry;
     document.getElementById("editDescription").value = item.description;
+    document.getElementById("editAddAutoShop").checked = item.autoShop;
 
     // Speichere die UUID im Modal als Attribut
     document.getElementById("editItemModal").setAttribute("data-uuid", item.uuid);
@@ -105,6 +119,7 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
     let name = document.getElementById("editItemName").value;
     let expiry = document.getElementById("editExpiryDate").value;
     let description = document.getElementById("editDescription").value;
+    let autoShop = document.getElementById("editAddAutoShop").checked;
 
     if (name === "" || expiry === "") {
         document.getElementById("editErrorMessage").style.display = "block";
@@ -116,7 +131,7 @@ document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte 
     // Findet das Item und aktualisiert die Werte
     let updatedItems = foodItems.map(item => {
         if (item.uuid === uuid) {
-            return { ...item, name, expiry, description };
+            return { ...item, name, expiry, description, autoShop };
         }
         return item;
     });
