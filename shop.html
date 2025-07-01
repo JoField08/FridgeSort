@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page responsive on mobile devices -->
     <script defer src="shophandlerservice.js"></script>
   <style>
-body {
+        body {
           margin: 0; /* Removes default margin around the page */
           height: 100vh; /* Makes the body take up the full height of the viewport */
           background-color: #1E1E2E; /* Dark background color */
@@ -181,13 +181,13 @@ body {
         margin-top: 10px;
         font-size: 1.2rem;
         }
-        .food-list {
+        .shop-list {
           margin: 20px;
           padding: 10px;
           padding-bottom: 60px;
           overflow-y: auto; /* activate scrolling when there are to many items */
         }
-        .food-item {
+        .shop-item {
       background: linear-gradient(145deg, #323247, #292A3A);
       padding: 20px;
       border-radius: 15px;
@@ -203,19 +203,19 @@ body {
       gap: 15px;
     }
 
-    .food-item:hover {
+    .shop-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 20px rgba(80, 250, 123, 0.5);
       border: 1.5px solid #50FA7B;
     }
 
     /* Linker Bereich mit Name und Beschreibung */
-    .food-item .left-section {
+    .shop-item .left-section {
       flex: 1 1 60%;
       min-width: 200px;
     }
 
-    .food-item h3 {
+    .shop-item h3 {
       font-weight: 700;
       font-size: 1.5rem;
       letter-spacing: 1.2px;
@@ -223,7 +223,7 @@ body {
       margin-bottom: 8px;
     }
 
-    .food-item p {
+    .shop-item p {
       font-size: 1rem;
       line-height: 1.3;
       color: #C0C0C0;
@@ -231,7 +231,7 @@ body {
     }
 
     /* Rechter Bereich mit Daten */
-    .food-item .right-section {
+    .shop-item .right-section {
       flex: 1 1 35%;
       min-width: 150px;
       display: flex;
@@ -243,7 +243,7 @@ body {
     }
 
     /* Daten-Labels fett */
-    .food-item .right-section div strong {
+    .shopd-item .right-section div strong {
       color: #50FA7B;
     }
 
@@ -335,7 +335,7 @@ body {
   transform: translateX(26px); /* Adjusted to slide all the way to the end */
 }
 
-  </style>
+    </style>
 </head>
  
 <body>
