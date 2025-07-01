@@ -14,7 +14,7 @@ function displayShopItems(){
     noItemsMessage.style.color = "#50FA7B"; // grüne Farbe passend zum Design
     noItemsMessage.style.fontSize = "1.4rem";
     noItemsMessage.style.fontStyle = "italic";
-    noItemsMessage.innerHTML = `Deine Einkaufsliste ist aktuell leer 🛒`;
+    noItemsMessage.innerHTML = `Du hast bereits alles im Haus 🛒`;
     noItemsMessage.onclick = () => {
     window.location.href = "checklist.html";
     }    
@@ -69,4 +69,8 @@ function deleteShopItem() {
     displayShopItems(); // Zeigt die geänderte Liste an
     document.getElementById("shopItemDetailModal").style.display = "none"; // schließt modal
 
+  }
+  function openShop(){
+    name = document.getElementById("shopModalItemName").textContent;
+    window.open('https://shop.rewe.de/productList?search='+name);
   }
