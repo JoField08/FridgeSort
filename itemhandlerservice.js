@@ -247,7 +247,7 @@ function saveItem() {
   }
   function tryAddItemToShopList(item) {
   if (item.autoShop) {
-    let shopItems = JSON.parse(localStorage.getItem("shopItems")) || [];
+    let shopItems = JSON.parse(localStorage.getItem("shopList")) || [];
 
     let shopEntry = {
       name: item.name,
@@ -256,7 +256,7 @@ function saveItem() {
     };
 
     shopItems.push(shopEntry);
-    localStorage.setItem("shopItems", JSON.stringify(shopItems));
+    localStorage.setItem("shopList", JSON.stringify(shopItems));
     console.log("Zur Einkaufsliste hinzugefügt:", shopEntry);
   }
 }
