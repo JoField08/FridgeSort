@@ -350,6 +350,25 @@
     <hr/>
 </div>
 
+<div id="shopItemDetailModal" class="modal">
+  <div class="modal-content">
+
+    <h2>Aktuelles Lebensmittel</h2>
+    <label>Name:</label>
+    <p id="shopModalItemName"></p>
+    <label>Beschreibung:</label>
+    <p id="shopModalDescription"></p>
+    <label>Hinzugefügt am:</label>
+    <p id="shopModalUsedAt"></p>
+
+    <!-- <button class="button-green" onclick="deleteShopItem()">Eingekauft</button> -->
+    <button class="button-red" onclick="closeShopItemDetailModal()">Abbrechen</button>
+    <button class="button-red" onclick="deleteShopItem()">Löschen</button>
+  </div>
+</div>
+
+
+
 <div class="shop-list" id="shopList"></div>
 
   <div class="nav bottom-nav">
