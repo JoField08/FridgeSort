@@ -34,8 +34,39 @@ function displayShopItems(){
         </div>
       `;
 
-      //shopDiv.onclick = () => openDeleteItemModal(item);
+      shopDiv.onclick = () => openShopItemDetailModal(item);
       shopList.appendChild(shopDiv);
     });
   }
 }
+
+function deleteShopItem() {
+    let uuid = document.getElementById("shopItemDetailModal").getAttribute("data-uuid");
+    let shopItems = JSON.parse(localStorage.getItem("shopList")) || [];
+  
+    let itemToDelete = shopItems.find(item => item.uuid === uuid); // 👈 Finde das Item zuerst
+
+     shopItems = shopItems.filter(item => item.uuid !== uuid);
+    localStorage.setItem("shopList", JSON.stringify(shopItems));
+  
+     displayShopItems();
+    closeShopItemDetailModal();
+  }
+
+    function openShopItemDetailModal(item) {
+  document.getElementById("shopItemDetailModal").style.display = "flex";
+
+  document.getElementById("shopModalItemName").textContent = item.name;
+  document.getElementById("shopModalDescription").textContent = item.description || "";
+  document.getElementById("shopModalUsedAt").textContent = item.usedAt;
+
+  // Speichere die UUID im Modal als Attribut
+  document.getElementById("shopItemDetailModal").setAttribute("data-uuid", item.uuid);
+}
+
+
+  function closeShopItemDetailModal(item){
+    displayShopItems(); // Zeigt die geänderte Liste an
+    document.getElementById("shopItemDetailModal").style.display = "none"; // schließt modal
+
+  }
