@@ -248,11 +248,13 @@ function saveItem() {
   function tryAddItemToShopList(item) {
   if (item.autoShop) {
     let shopItems = JSON.parse(localStorage.getItem("shopList")) || [];
+    const uuid = crypto.randomUUID();
 
     let shopEntry = {
       name: item.name,
       description: item.description || "",
-      usedAt: new Date().toLocaleDateString("de-DE")
+      usedAt: new Date().toLocaleDateString("de-DE"),
+      uuid: uuid
     };
 
     shopItems.push(shopEntry);
