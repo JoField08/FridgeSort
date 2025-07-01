@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", loadItems); // Lädt gespeicherte Items beim Start
+document.addEventListener("DOMContentLoaded", displayItems()); // Lädt gespeicherte Items beim Start
 
 function openAddItemModal() {
     document.getElementById("addItemModal").style.display = "flex";
@@ -24,7 +24,7 @@ function saveItem() {
     let expiry = document.getElementById("expiryDate").value;
     let current = document.getElementById("currentDate").value;
     let description = document.getElementById("description").value;
-    let autoShop = document.getElementById("addAutoShop").checked; // NEU: Checkbox-Wert
+    let autoShop = document.getElementById("addAutoShop").checked;
     const uuid = crypto.randomUUID();
 
     if (name === "" || expiry === "") {
@@ -37,7 +37,7 @@ function saveItem() {
         description,
         current,
         expiry,
-        autoShop, // NEU: Checkbox-Wert mit ins Objekt speichern
+        autoShop,
         uuid
     };
 
@@ -51,49 +51,47 @@ function saveItem() {
 
 function displayItems() {
     let foodList = document.getElementById("foodList");
-    foodList.innerHTML = ""; // Liste leeren
+    foodList.innerHTML = "";
     let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
-    //sort after expiry
-    foodItems.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
 
+    foodItems.sort((a, b) => new Date(a.expiry) - new Date(b.expiry)); //sort after expiry
 
-    if (foodItems.length < 1) {
-        // Wenn keine Items da sind, füge eine freundliche Nachricht ein
+    if (foodItems.length < 1) { //if no items are present set an error message
         let noItemsMessage = document.createElement("div");
         noItemsMessage.style.textAlign = "center";
         noItemsMessage.style.padding = "40px 20px";
-        noItemsMessage.style.color = "#50FA7B"; // grüne Farbe passend zum Design
+        noItemsMessage.style.color = "#50FA7B";
         noItemsMessage.style.fontSize = "1.4rem";
         noItemsMessage.style.fontStyle = "italic";
         noItemsMessage.innerHTML = `Keine Lebensmittel im Haus 🥶<br> Zeit zum Einkaufen! 🛒`;
-        noItemsMessage.onclick = () => {
+        noItemsMessage.onclick = () => { //send to shop.html on click
             window.location.href = "shop.html";
         }
-
         foodList.appendChild(noItemsMessage);
-    } else {
-        foodItems.forEach(item => {
-            let formattedCurrentDate = formatDate(item.current);
-            let formattedExpiryDate = formatDate(item.expiry);
+        return;
+    }
 
-            let foodDiv = document.createElement("div");
-            foodDiv.classList.add("food-item");
-            foodDiv.innerHTML = `
-        <div class="left-section">
-          <h3><big>${item.name}</big></h3>
-          ${item.description ? `<p>${item.description}</p>` : ""}
-        </div>
-        <div class="right-section">
-          <div><strong>Eingetragen am:</strong> ${formattedCurrentDate}</div>
-          <div><strong>Ablaufdatum:</strong> ${formattedExpiryDate}</div>
-          <div><strong>Auto-Einkauf:</strong> ${item.autoShop ? "Ja" : "Nein"}</div>
-        </div>
+    foodItems.forEach(item => {
+    let formattedCurrentDate = formatDate(item.current);
+    let formattedExpiryDate = formatDate(item.expiry);
+
+    let foodDiv = document.createElement("div");
+    foodDiv.classList.add("food-item");
+    foodDiv.innerHTML = `
+    <div class="left-section">
+    <h3><big>${item.name}</big></h3>
+    ${item.description ? `<p>${item.description}</p>` : ""}
+    </div>
+    <div class="right-section">
+      <div><strong>Eingetragen am:</strong> ${formattedCurrentDate}</div>
+      <div><strong>Ablaufdatum:</strong> ${formattedExpiryDate}</div>
+      <div><strong>Auto-Einkauf:</strong> ${item.autoShop ? "Ja" : "Nein"}</div>
+    </div>
       `;
 
-            foodDiv.onclick = () => openEditItemModal(item);
-            foodList.appendChild(foodDiv);
-        });
-    }
+    foodDiv.onclick = () => openEditItemModal(item);
+    foodList.appendChild(foodDiv);
+    });
 }
 
 function openEditItemModal(item) {
@@ -105,15 +103,14 @@ function openEditItemModal(item) {
     document.getElementById("editDescription").value = item.description;
     document.getElementById("editAddAutoShop").checked = item.autoShop;
 
-    // Speichere die UUID im Modal als Attribut
-    document.getElementById("editItemModal").setAttribute("data-uuid", item.uuid);
+    document.getElementById("editItemModal").setAttribute("data-uuid", item.uuid); // store uuid in modal to use later
 }
 
 function closeEditItemModal(item){
-    displayItems(); // Zeigt die geänderte Liste an
-    document.getElementById("editItemModal").style.display = "none"; // schließt modal
-
+    displayItems();
+    document.getElementById("editItemModal").style.display = "none";
 }
+
 function saveEditedItem() {
     let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
     let name = document.getElementById("editItemName").value;
@@ -128,8 +125,7 @@ function saveEditedItem() {
 
     let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
 
-    // Findet das Item und aktualisiert die Werte
-    let updatedItems = foodItems.map(item => {
+    let updatedItems = foodItems.map(item => { // search for item using uuid and update it
         if (item.uuid === uuid) {
             return { ...item, name, expiry, description, autoShop };
         }
@@ -145,10 +141,9 @@ function deleteItem() {
     let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
     let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
 
-    let itemToDelete = foodItems.find(item => item.uuid === uuid); // 👈 Finde das Item zuerst
-
+    let itemToDelete = foodItems.find(item => item.uuid === uuid);
     if (itemToDelete) {
-        tryAddItemToShopList(itemToDelete); // 👈 Prüfen ob zur Einkaufsliste hinzugefügt werden soll
+        tryAddItemToShopList(itemToDelete); // try to add item to shop list if autoShop is true
     }
 
     foodItems = foodItems.filter(item => item.uuid !== uuid);
@@ -160,12 +155,9 @@ function deleteItem() {
 
 function throwItem() {
     let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
-    console.log("Das Objekt mit der UUID: " + uuid + " wurde weggeworfen.");
-
     deleteItem();
 
-    // Stats laden oder neu anlegen
-    let stats = JSON.parse(localStorage.getItem("userStatsData")) || {
+    let stats = JSON.parse(localStorage.getItem("userStatsData")) || { //get or create stats
         progress: 0,
         level: 0,
         savedItems: 0,
@@ -174,28 +166,18 @@ function throwItem() {
         streakSince: new Date().toLocaleDateString("de-DE")
     };
 
-    // streak zurücksetzen
-    stats.streak = 0;
+    stats.streak = 0; //reset streak
     stats.streakSince = new Date().toLocaleDateString("de-DE");
 
-    // Optional: Highscore beibehalten oder anpassen, hier bleibt er so wie er ist
-
-    // Speichern
-    localStorage.setItem("userStatsData", JSON.stringify(stats));
-
-    console.log("Statistiken aktualisiert:", stats);
-    console.table(stats);
+    localStorage.setItem("userStatsData", JSON.stringify(stats)); // save stats
 }
 
 
 function useItem() {
     let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
-    console.log("Das Objekt mit der UUID: " + uuid + " wurde benutzt.");
+       deleteItem();
 
-    deleteItem(); // Item entfernen
-
-    // Stats laden oder neu anlegen
-    let stats = JSON.parse(localStorage.getItem("userStatsData")) || {
+    let stats = JSON.parse(localStorage.getItem("userStatsData")) || { // get or create stats
         progress: 0,
         level: 0,
         savedItems: 0,
@@ -204,36 +186,25 @@ function useItem() {
         streakSince: new Date().toLocaleDateString("de-DE")
     };
 
-    // 1 zu savedItems addieren
-    stats.savedItems += 1;
+    stats.savedItems += 1; //increase saved items count
+    stats.streak += 1; //increase streak count
 
-    // streak um 1 erhöhen
-    stats.streak += 1;
-
-    // highscore updaten, wenn streak größer ist
-    if (stats.streak > stats.highscore) {
+    if (stats.streak > stats.highscore) { //update highscore if streak is higher
         stats.highscore = stats.streak;
-        stats.highscoreSince = new Date().toLocaleDateString("de-DE"); // Datum auch aktualisieren
+        stats.highscoreSince = new Date().toLocaleDateString("de-DE"); //update date
     }
 
-    // Fortschritt im aktuellen Level berechnen (z.B. 10 Items pro Level)
-    stats.progress = (stats.savedItems % 10) * 10; // von 0% bis 90%
+    stats.progress = (stats.savedItems % 10) * 10; //calculate progress as percentage of current level
+    stats.level = Math.floor(stats.savedItems / 10); //calculate level based on saved items
+    stats.badge = Math.min(10, Math.floor(stats.level / 5) + 1); //update badge based on level
 
-    // Level berechnen
-    stats.level = Math.floor(stats.savedItems / 10);
-
-    // Badge (optional) – alle 5 Level neuer Badge, max. 10
-    stats.badge = Math.min(10, Math.floor(stats.level / 5) + 1);
-
-    // Speichern
-    localStorage.setItem("userStatsData", JSON.stringify(stats));
+    localStorage.setItem("userStatsData", JSON.stringify(stats)); //save stats
 
     console.log("Statistiken aktualisiert:", stats);
     console.table(stats);
 }
 
-
-function formatDate(dateString) {
+function formatDate(dateString) { // Format date to "DD.MM.YYYY" (German format)
     if (!dateString) return "-";
     let date = new Date(dateString);
     return date.toLocaleDateString("de-DE", {
@@ -242,23 +213,20 @@ function formatDate(dateString) {
         year: "numeric"
     });
 }
-function loadItems() {
-    displayItems();
-}
-function tryAddItemToShopList(item) {
-    if (item.autoShop) {
-        let shopItems = JSON.parse(localStorage.getItem("shopList")) || [];
-        const uuid = crypto.randomUUID();
-
-        let shopEntry = {
-            name: item.name,
-            description: item.description || "",
-            usedAt: new Date().toLocaleDateString("de-DE"),
-            uuid: uuid
-        };
-
-        shopItems.push(shopEntry);
-        localStorage.setItem("shopList", JSON.stringify(shopItems));
-        console.log("Zur Einkaufsliste hinzugefügt:", shopEntry);
+function tryAddItemToShopList(item) { // Check if item should be added to the shop list
+    if (!item.autoShop) {
+    return;
     }
+    let shopItems = JSON.parse(localStorage.getItem("shopList")) || []; //get existing shop items or create an empty array
+    const uuid = crypto.randomUUID();
+
+     let shopEntry = {
+       name: item.name,
+       description: item.description || "",
+       usedAt: new Date().toLocaleDateString("de-DE"),
+       uuid: uuid
+    };
+
+    shopItems.push(shopEntry);
+    localStorage.setItem("shopList", JSON.stringify(shopItems));
 }
