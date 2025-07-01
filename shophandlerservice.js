@@ -14,7 +14,7 @@ function displayShopItems(){
     noItemsMessage.style.color = "#50FA7B"; // grüne Farbe passend zum Design
     noItemsMessage.style.fontSize = "1.4rem";
     noItemsMessage.style.fontStyle = "italic";
-    noItemsMessage.innerHTML = `Du hast bereits alles im Haus 🛒`;
+    noItemsMessage.innerHTML = `Deine Einkaufsliste ist aktuell leer 🛒`;
     noItemsMessage.onclick = () => {
     window.location.href = "checklist.html";
     }    
