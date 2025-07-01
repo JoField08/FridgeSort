@@ -145,6 +145,12 @@ function saveItem() {
     let uuid = document.getElementById("editItemModal").getAttribute("data-uuid");
     let foodItems = JSON.parse(localStorage.getItem("foodList")) || [];
   
+    let itemToDelete = foodItems.find(item => item.uuid === uuid); // 👈 Finde das Item zuerst
+
+  if (itemToDelete) {
+    tryAddItemToShopList(itemToDelete); // 👈 Prüfen ob zur Einkaufsliste hinzugefügt werden soll
+  }
+
      foodItems = foodItems.filter(item => item.uuid !== uuid);
     localStorage.setItem("foodList", JSON.stringify(foodItems));
   
@@ -239,6 +245,18 @@ function saveItem() {
   function loadItems() {
       displayItems();
   }
-  function debug(content){
-    console.log(content)
+  function tryAddItemToShopList(item) {
+  if (item.autoShop) {
+    let shopItems = JSON.parse(localStorage.getItem("shopItems")) || [];
+
+    let shopEntry = {
+      name: item.name,
+      description: item.description || "",
+      usedAt: new Date().toLocaleDateString("de-DE")
+    };
+
+    shopItems.push(shopEntry);
+    localStorage.setItem("shopItems", JSON.stringify(shopItems));
+    console.log("Zur Einkaufsliste hinzugefügt:", shopEntry);
   }
+}
