@@ -78,24 +78,48 @@
       margin: 15px 0;
     }
 
-    .nav {
-      width: 100%;
-      background: #1E1E2E;
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      height: 55px;
-      box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2);
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
+    .rounded {
+          border-radius: 10px; /* Rounds the corners of elements */
+        }     
+        .imagesize-icons-taskbar {
+          height: 50px; /* Sets height for taskbar icons */
+        }    
+        
+        .nav {
+          width: 100%; /* Makes the navbar span the full width */
+          text-align: center; /* Centers navbar items */
+          background: #1E1E2E; /* Matches the page background color */
+          position: fixed; /* Fixes the navbar to the bottom of the screen */
+          left: 0; /* Positions the navbar at the left */
+          bottom: 0; /* Positions the navbar at the bottom */
+          box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
+          z-index: 1000; /* Ensures navbar stays on top */
+          height: 55px; /* Sets navbar height */
+        }
 
-    .nav img {
-      height: 40px;
-      width: 40px;
-    }
+        .nav ul {
+          list-style-type: none; /* Removes bullets from list items */
+          padding: 0; /* Removes padding */
+          margin: 0; /* Removes margin */
+          display: flex; /* Enables Flexbox layout */
+          justify-content: space-evenly; /* Distributes navbar items evenly */
+          width: 100%; /* Makes the navbar span the full width */
+          height: 100%; /* Ensures icons fill the navbar */
+        }
 
+        .nav ul li {
+          display: inline-block; /* Displays list items inline */
+        }
+
+        .nav ul li .nav-link {
+          text-decoration: none; /* Removes underline from links */
+          color: #ccc; /* Sets link color */
+          padding: 15px; /* Adds padding around the links */
+          display: block; /* Makes links block elements */
+        }
+        .content-centered{
+          text-align: center;
+        }
     .stats-container {
       margin-top: 30px;
       padding: 30px;
@@ -298,12 +322,18 @@ button#importBtn:hover, button#exportBtn:hover {
 
 
 <div class="nav">
-  <a href="https://www.google.com/maps/search/Geöffnete+Supermärkte+in+meiner+Nähe"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a>
-  <a href="recepies.html"><img src="img/taskbar_book.png" alt="Recipes"></a>
-  <a href="checklist.html"><img src="img/taskbar_checklist.png" alt="Checklist"></a>
-  <a href="shop.html"><img src="img/taskbar_shopping_car.png" alt="Shop"></a>
-  <a href="profile.html"><img src="img/taskbar_profile.png" alt="Profile"></a>
+    <ul>
+        <!-- <li><a href="map.html"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li> -->
+        <li><a href="https://www.google.com/maps/search/Geöffnete+Supermärkte+in+meiner+Nähe"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="recepies.html"><img src="img/taskbar_book.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="checklist.html"><img src="img/taskbar_checklist.png" class="rounded imagesize-icons-taskbar"></a>
+        </li>
+        <li><a href="shop.html"><img src="img/taskbar_shopping_car.png" class="rounded imagesize-icons-taskbar"></a>
+        </li>
+        <li><a href="profile.html"><img src="img/taskbar_profile.png" class="rounded imagesize-icons-taskbar"></a></li>
+    </ul>
 </div>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
