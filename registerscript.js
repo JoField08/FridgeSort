@@ -25,7 +25,7 @@ function saveUserInfo() {
     let lastName = document.getElementById("inputLastName").value.trim();
     let email = document.getElementById("inputEmail").value.trim();
     let errorMessage = document.getElementById("error-message");
-    
+
     errorMessage.textContent = ""; // Fehlernachricht zurücksetzen
 
     if (name === "" || lastName === "" || email === "") {
@@ -46,5 +46,5 @@ function saveUserInfo() {
 
     console.log("Gespeicherte Werte:", JSON.parse(localStorage.getItem("userLoginData")));
 
-    window.location.href = "profile.html"; 
+    window.location.href = "profile.html";
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page responsive on mobile devices -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script defer src="itemhandlerservice.js"></script>
   <style>
-        body {
+      body {
           margin: 0; /* Removes default margin around the page */
           height: 100vh; /* Makes the body take up the full height of the viewport */
           background-color: #1E1E2E; /* Dark background color */
@@ -16,15 +16,15 @@
           display: block; /* Prevents body from being restricted to 100vh */
           padding-bottom: 100px; /* Adds space for the navbar at the bottom */
           padding-top: 0px; /* Removes any space at the top */
-        }
+      }
 
-        * {
+      * {
           padding: 0; /* Removes padding from all elements */
           margin: 0; /* Removes margin from all elements */
           box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
-        }
+      }
 
-        .logo {
+      .logo {
           background-color: #1E1E2E; /* Same color as the body background */
           color: #E0E0E0; /* Light gray color for the text */
           text-align: center; /* Centers the text horizontally */
@@ -34,36 +34,36 @@
           letter-spacing: 2px; /* Adds space between the letters */
           box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Adds shadow to make the logo pop */
           z-index: 1000; /* Ensures the logo stays on top */
-        }
-        .logo span {
+      }
+      .logo span {
           color: #50FA7B; /* Changes the color of the "Sort" part of the logo */
-        }
+      }
 
-        .bottom-right-item-add-button {
+      .bottom-right-item-add-button {
           position: fixed; /* Fixes the button at a specific position on the screen */
           bottom: 100px; /* Positions the button 100px from the bottom */
           right: 10px; /* Positions the button 10px from the right */
-        }
+      }
 
-        .imagesize-item-add-button {
+      .imagesize-item-add-button {
           height: 75px; /* Sets the button height */
-        }
-        .rounded {
+      }
+      .rounded {
           border-radius: 10px; /* Rounds the corners of elements */
-        }
-        .smallimage {
+      }
+      .smallimage {
           height: 100px; /* Sets height for small images */
-        }
-        .imagesize-icons-taskbar {
+      }
+      .imagesize-icons-taskbar {
           height: 50px; /* Sets height for taskbar icons */
-        }
-        .modal-content input, .modal-content select, .modal-content button {
+      }
+      .modal-content input, .modal-content select, .modal-content button {
           margin: 10px 0; /* Adds margin around input fields */
           padding: 10px; /* Adds padding inside input fields */
           font-size: 16px; /* Sets font size for inputs and buttons */
-        }
+      }
 
-        .nav {
+      .nav {
           width: 100%; /* Makes the navbar span the full width */
           text-align: center; /* Centers navbar items */
           background: #1E1E2E; /* Matches the page background color */
@@ -73,9 +73,9 @@
           box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
           z-index: 1000; /* Ensures navbar stays on top */
           height: 55px; /* Sets navbar height */
-        }
+      }
 
-        .nav ul {
+      .nav ul {
           list-style-type: none; /* Removes bullets from list items */
           padding: 0; /* Removes padding */
           margin: 0; /* Removes margin */
@@ -83,22 +83,22 @@
           justify-content: space-evenly; /* Distributes navbar items evenly */
           width: 100%; /* Makes the navbar span the full width */
           height: 100%; /* Ensures icons fill the navbar */
-        }
+      }
 
-        .nav ul li {
+      .nav ul li {
           display: inline-block; /* Displays list items inline */
-        }
+      }
 
-        .nav ul li .nav-link {
+      .nav ul li .nav-link {
           text-decoration: none; /* Removes underline from links */
           color: #ccc; /* Sets link color */
           padding: 15px; /* Adds padding around the links */
           display: block; /* Makes links block elements */
-        }
-        .content-centered{
+      }
+      .content-centered{
           text-align: center;
-        }
-        .modal {
+      }
+      .modal {
           display: none;
           position: fixed;
           z-index: 1001;
@@ -109,233 +109,231 @@
           background-color: rgba(0, 0, 0, 0.5);
           justify-content: center;
           align-items: center;
-        }
-        .modal-content {
+      }
+      .modal-content {
           background-color: #282a36;
           padding: 20px;
           border-radius: 8px;
           width: 300px;
           box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-        }
-        .modal-content label, .modal-content input, .modal-content textarea {
+      }
+      .modal-content label, .modal-content input, .modal-content textarea {
           display: block;
           width: 100%;
           margin-bottom: 10px;
-        }
-        .modal-content input, .modal-content textarea {
+      }
+      .modal-content input, .modal-content textarea {
           padding: 8px;
           border: none;
           border-radius: 5px;
-        }
-        .modal-content button {
+      }
+      .modal-content button {
           width: 100%;
           padding: 10px;
           border: none;
           border-radius: 5px;
           cursor: pointer;
           font-size: 16px;
-        }
-        .button-green {
+      }
+      .button-green {
           background-color: #50FA7B;
-        }
-        .button-green:hover {
+      }
+      .button-green:hover {
           background-color: #45e06e;
-        }
-        .button-red {
-         background-color: #FF5555;
-        }
+      }
+      .button-red {
+          background-color: #FF5555;
+      }
 
-        .button-red:hover {
-         background-color: #e04b4b;
-        }
-        .button-yellow {
-         background-color: #be800b;
-        }
+      .button-red:hover {
+          background-color: #e04b4b;
+      }
+      .button-yellow {
+          background-color: #be800b;
+      }
 
-        .button-yellow:hover {
-         background-color: #be800b;
-        }
-        .error-message {
+      .button-yellow:hover {
+          background-color: #be800b;
+      }
+      .error-message {
           color: #FF5555;
           font-size: 15px;
           text-align: left;
           margin-bottom: 10px;
           display: none;
-        }
-        .no-items-display-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        }
+      }
+      .no-items-display-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+      }
 
-        .no-items-display-image {
-         max-width: 90%;
-        max-height: 50vh;
-        object-fit: contain;
-         display: none;
-        }
+      .no-items-display-image {
+          max-width: 90%;
+          max-height: 50vh;
+          object-fit: contain;
+          display: none;
+      }
 
-        .no-items-display-text {
-        margin-top: 10px;
-        font-size: 1.2rem;
-        }
-        .food-list {
+      .no-items-display-text {
+          margin-top: 10px;
+          font-size: 1.2rem;
+      }
+      .food-list {
           margin: 20px;
           padding: 10px;
           padding-bottom: 60px;
           overflow-y: auto; /* activate scrolling when there are to many items */
-        }
-        .food-item {
-      background: linear-gradient(145deg, #323247, #292A3A);
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 8px 15px rgba(80, 250, 123, 0.3);
-      color: #E0E0E0;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      border: 1.5px solid transparent;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .food-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(80, 250, 123, 0.5);
-      border: 1.5px solid #50FA7B;
-    }
-
-    /* Linker Bereich mit Name und Beschreibung */
-    .food-item .left-section {
-      flex: 1 1 60%;
-      min-width: 200px;
-    }
-
-    .food-item h3 {
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: 1.2px;
-      color: #50FA7B;
-      margin-bottom: 8px;
-    }
-
-    .food-item p {
-      font-size: 1rem;
-      line-height: 1.3;
-      color: #C0C0C0;
-      font-style: italic;
-    }
-
-    /* Rechter Bereich mit Daten */
-    .food-item .right-section {
-      flex: 1 1 35%;
-      min-width: 150px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.9rem;
-      color: #A0A0A0;
-    }
-
-    /* Daten-Labels fett */
-    .food-item .right-section div strong {
-      color: #50FA7B;
-    }
-
-    /* Responsive: Auf kleinen Bildschirmen alles untereinander */
-    @media (max-width: 600px) {
+      }
       .food-item {
-        flex-direction: column;
+          background: linear-gradient(145deg, #323247, #292A3A);
+          padding: 20px;
+          border-radius: 15px;
+          margin-bottom: 15px;
+          box-shadow: 0 8px 15px rgba(80, 250, 123, 0.3);
+          color: #E0E0E0;
+          transition: transform 0.2s ease, box-shadow 0.3s ease;
+          cursor: pointer;
+          border: 1.5px solid transparent;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 15px;
       }
-      .food-item .left-section, .food-item .right-section {
-        flex: 1 1 100%;
-        min-width: unset;
+
+      .food-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 20px rgba(80, 250, 123, 0.5);
+          border: 1.5px solid #50FA7B;
       }
-    }
 
-    .inventory-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: #50FA7B; /* Frische grüne Farbe passend zum Logo */
-      font-weight: 600;
-      font-size: 1.8rem;
-      margin: 20px 0 10px 0;
-    }
+      /* Linker Bereich mit Name und Beschreibung */
+      .food-item .left-section {
+          flex: 1 1 60%;
+          min-width: 200px;
+      }
 
-    .inventory-icon {
-      height: 28px;
-      filter: brightness(0) invert(1); /* Weißes Icon für dunklen Hintergrund */
-    }
+      .food-item h3 {
+          font-weight: 700;
+          font-size: 1.5rem;
+          letter-spacing: 1.2px;
+          color: #50FA7B;
+          margin-bottom: 8px;
+      }
 
-    .inventory-header hr {
-      flex-grow: 1;
-      border: none;
-      border-bottom: 1.5px solid #50FA7B;
-      margin-left: 15px;
-      opacity: 0.3;
-    }
+      .food-item p {
+          font-size: 1rem;
+          line-height: 1.3;
+          color: #C0C0C0;
+          font-style: italic;
+      }
 
-        .toggle-container {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+      /* Rechter Bereich mit Daten */
+      .food-item .right-section {
+          flex: 1 1 35%;
+          min-width: 150px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 6px;
+          font-size: 0.9rem;
+          color: #A0A0A0;
+      }
 
-  color: #E0E0E0;
-  gap: 10px;
-}
- 
-.toggle-switch {
-  position: relative;
-  display: flex;
-  width: 50px;
-  height: 24px;
-}
+      /* Daten-Labels fett */
+      .food-item .right-section div strong {
+          color: #50FA7B;
+      }
 
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+      /* Responsive: Auf kleinen Bildschirmen alles untereinander */
+      @media (max-width: 600px) {
+          .food-item {
+              flex-direction: column;
+          }
+          .food-item .left-section, .food-item .right-section {
+              flex: 1 1 100%;
+              min-width: unset;
+          }
+      }
 
-.slider {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  background-color: #646161;
-  transition: 0.4s;
-  border-radius: 24px;
-  width: 50px; /* ← NEU */
-}
+      .inventory-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          color: #50FA7B; /* Frische grüne Farbe passend zum Logo */
+          font-weight: 600;
+          font-size: 1.8rem;
+          margin: 20px 0 10px 0;
+      }
 
- 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px; /* Slightly smaller than the slider height */
-  width: 20px; /* Same as height for a perfect circle */
-  left: 2px; /* Small padding from the left for the initial position */
-  top: 2px; /* Small padding from the top */
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
- 
-.toggle-switch input:checked + .slider {
-  background-color: #50FA7B;
-}
- 
-.toggle-switch input:checked + .slider:before {
-  transform: translateX(26px); /* Adjusted to slide all the way to the end */
-}
+      .inventory-icon {
+          height: 28px;
+          filter: brightness(0) invert(1); /* Weißes Icon für dunklen Hintergrund */
+      }
 
-    </style>
+      .inventory-header hr {
+          flex-grow: 1;
+          border: none;
+          border-bottom: 1.5px solid #50FA7B;
+          margin-left: 15px;
+          opacity: 0.3;
+      }
+
+      .toggle-container {
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+
+          color: #E0E0E0;
+          gap: 10px;
+      }
+
+      .toggle-switch {
+          position: relative;
+          display: flex;
+          width: 50px;
+          height: 24px;
+      }
+
+      .toggle-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+
+      .slider {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          background-color: #646161;
+          transition: 0.4s;
+          border-radius: 24px;
+          width: 50px; /* ← NEU */
+      }
+
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 20px; /* Slightly smaller than the slider height */
+          width: 20px; /* Same as height for a perfect circle */
+          left: 2px; /* Small padding from the left for the initial position */
+          top: 2px; /* Small padding from the top */
+          background-color: white;
+          transition: 0.4s;
+          border-radius: 50%;
+      }
+
+      .toggle-switch input:checked + .slider {
+          background-color: #50FA7B;
+      }
+
+      .toggle-switch input:checked + .slider:before {
+          transform: translateX(26px); /* Adjusted to slide all the way to the end */
+      }
+  </style>
 </head>
 
 <body>
@@ -419,12 +417,6 @@
 
 <div class="food-list" id="foodList"></div>
 
-<!--
-<div class="no-items-display-container" id="noItemsDisplay">
-  <img src="img/sad-face.png" class="no-items-display-image" id="noItemDisplayImage">
-  <p class="no-items-display-text">Du hast aktuell keine Lebensmittel zu Hause.</p>
-</div>
--->
 
 <div class="nav bottom-nav">
     <ul>
