@@ -148,13 +148,14 @@
         .button-red:hover {
          background-color: #e04b4b;
         }
-        .button-yellow {
-         background-color: #be800b;
-        }
+.button-blue {
+  background-color: #3B82F6; /* Ein klares, freundliches Blau */
 
-        .button-yellow:hover {
-         background-color: #be800b;
-        }
+}
+
+.button-blue:hover {
+  background-color: #2563EB; /* Etwas dunkleres Blau beim Hover */
+}
         .error-message {
           color: #FF5555;
           font-size: 15px;
@@ -346,7 +347,7 @@
 
   <div class="inventory-header">
     <!-- <img src="img/fridge_icon.svg" alt="Bestand Icon" class="inventory-icon" /> -->
-    <h2> Aktuelle Einkaufsliste</h2>
+    <h2> Aktueller Einkaufsliste</h2>
     <hr/>
 </div>
 
@@ -364,8 +365,11 @@
     <!-- <button class="button-green" onclick="deleteShopItem()">Eingekauft</button> -->
     <button class="button-green" onclick="closeShopItemDetailModal()">Abbrechen</button>
     <button class="button-red" onclick="deleteShopItem()">Löschen</button>
+    <button class="button-blue" onclick="openShop()">Aktuelle Angebote</button>
   </div>
 </div>
+
+
 
 <div class="shop-list" id="shopList"></div>
 
