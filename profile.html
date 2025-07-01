@@ -1,329 +1,330 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    body {
-      margin: 0;
-      background-color: #1E1E2E;
-      color: #E0E0E0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding-bottom: 100px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body {
+          margin: 0;
+          background-color: #1E1E2E;
+          color: #E0E0E0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding-bottom: 100px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
+        * {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+        }
 
-    .logo {
-      background-color: #1E1E2E;
-      color: #E0E0E0;
-      padding: 20px 0;
-      font-size: 36px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      text-align: center;
-    }
+        .logo {
+          background-color: #1E1E2E;
+          color: #E0E0E0;
+          padding: 20px 0;
+          font-size: 36px;
+          font-weight: bold;
+          letter-spacing: 2px;
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+          width: 100%;
+          text-align: center;
+        }
 
-    .logo span {
-      color: #50FA7B;
-    }
+        .logo span {
+          color: #50FA7B;
+        }
 
-    .profile-container {
-      margin-top: 30px;
-      padding: 30px;
-      background-color: #282A36;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 450px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-    }
+        .profile-container {
+          margin-top: 30px;
+          padding: 30px;
+          background-color: #282A36;
+          border-radius: 20px;
+          width: 90%;
+          max-width: 450px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+          transition: all 0.3s ease;
+        }
 
-    .profile-container h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #50FA7B;
-    }
+        .profile-container h1 {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: #50FA7B;
+        }
 
-    .profile-container h3 {
-      margin: 20px 0 5px;
-      font-size: 16px;
-      color: #A4A4A4;
-      font-weight: normal;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+        .profile-container h3 {
+          margin: 20px 0 5px;
+          font-size: 16px;
+          color: #A4A4A4;
+          font-weight: normal;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
 
-    .profile-container p {
-      margin-bottom: 10px;
-      font-size: 18px;
-      font-weight: 500;
-      color: #E0E0E0;
-    }
+        .profile-container p {
+          margin-bottom: 10px;
+          font-size: 18px;
+          font-weight: 500;
+          color: #E0E0E0;
+        }
 
-    .profile-container hr {
-      border: none;
-      height: 1px;
-      background-color: #444;
-      margin: 15px 0;
-    }
+        .profile-container hr {
+          border: none;
+          height: 1px;
+          background-color: #444;
+          margin: 15px 0;
+        }
 
-    .rounded {
-      border-radius: 10px; /* Rounds the corners of elements */
-    }
-    .imagesize-icons-taskbar {
-      height: 50px; /* Sets height for taskbar icons */
-    }
+        .rounded {
+          border-radius: 10px; /* Rounds the corners of elements */
+        }
+        .imagesize-icons-taskbar {
+          height: 50px; /* Sets height for taskbar icons */
+        }
 
-    .nav {
-      width: 100%; /* Makes the navbar span the full width */
-      text-align: center; /* Centers navbar items */
-      background: #1E1E2E; /* Matches the page background color */
-      position: fixed; /* Fixes the navbar to the bottom of the screen */
-      left: 0; /* Positions the navbar at the left */
-      bottom: 0; /* Positions the navbar at the bottom */
-      box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
-      z-index: 1000; /* Ensures navbar stays on top */
-      height: 55px; /* Sets navbar height */
-    }
+        .nav {
+          width: 100%; /* Makes the navbar span the full width */
+          text-align: center; /* Centers navbar items */
+          background: #1E1E2E; /* Matches the page background color */
+          position: fixed; /* Fixes the navbar to the bottom of the screen */
+          left: 0; /* Positions the navbar at the left */
+          bottom: 0; /* Positions the navbar at the bottom */
+          box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
+          z-index: 1000; /* Ensures navbar stays on top */
+          height: 55px; /* Sets navbar height */
+        }
 
-    .nav ul {
-      list-style-type: none; /* Removes bullets from list items */
-      padding: 0; /* Removes padding */
-      margin: 0; /* Removes margin */
-      display: flex; /* Enables Flexbox layout */
-      justify-content: space-evenly; /* Distributes navbar items evenly */
-      width: 100%; /* Makes the navbar span the full width */
-      height: 100%; /* Ensures icons fill the navbar */
-    }
+        .nav ul {
+          list-style-type: none; /* Removes bullets from list items */
+          padding: 0; /* Removes padding */
+          margin: 0; /* Removes margin */
+          display: flex; /* Enables Flexbox layout */
+          justify-content: space-evenly; /* Distributes navbar items evenly */
+          width: 100%; /* Makes the navbar span the full width */
+          height: 100%; /* Ensures icons fill the navbar */
+        }
 
-    .nav ul li {
-      display: inline-block; /* Displays list items inline */
-    }
+        .nav ul li {
+          display: inline-block; /* Displays list items inline */
+        }
 
-    .nav ul li .nav-link {
-      text-decoration: none; /* Removes underline from links */
-      color: #ccc; /* Sets link color */
-      padding: 15px; /* Adds padding around the links */
-      display: block; /* Makes links block elements */
-    }
-    .content-centered{
-      text-align: center;
-    }
-    .stats-container {
-      margin-top: 30px;
-      padding: 30px;
-      background-color: #282A36;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 450px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      text-align: center;
-    }
+        .nav ul li .nav-link {
+          text-decoration: none; /* Removes underline from links */
+          color: #ccc; /* Sets link color */
+          padding: 15px; /* Adds padding around the links */
+          display: block; /* Makes links block elements */
+        }
+        .content-centered{
+          text-align: center;
+        }
+        .stats-container {
+          margin-top: 30px;
+          padding: 30px;
+          background-color: #282A36;
+          border-radius: 20px;
+          width: 90%;
+          max-width: 450px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+          text-align: center;
+        }
 
-    .stats-container h2 {
-      color: #50FA7B;
-      margin-bottom: 20px;
-    }
+        .stats-container h2 {
+          color: #50FA7B;
+          margin-bottom: 20px;
+        }
 
-    .progress-wrapper {
-      margin-bottom: 20px;
-    }
+        .progress-wrapper {
+          margin-bottom: 20px;
+        }
 
-    .progress-bar {
-      height: 20px;
-      width: 100%;
-      background-color: #444;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-    }
+        .progress-bar {
+          height: 20px;
+          width: 100%;
+          background-color: #444;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
 
-    .progress-fill {
-      height: 100%;
-      background-color: #50FA7B;
-      transition: width 0.3s ease;
-    }
+        .progress-fill {
+          height: 100%;
+          background-color: #50FA7B;
+          transition: width 0.3s ease;
+        }
 
-    .progress-text {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #CCC;
-    }
+        .progress-text {
+          margin-top: 8px;
+          font-size: 14px;
+          color: #CCC;
+        }
 
-    .stat-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+        .stat-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
 
-    .stat-item h3 {
-      margin-bottom: 5px;
-      font-size: 16px;
-      color: #A4A4A4;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+        .stat-item h3 {
+          margin-bottom: 5px;
+          font-size: 16px;
+          color: #A4A4A4;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
 
-    .stat-item p {
-      font-size: 18px;
-      font-weight: 500;
-      color: #E0E0E0;
-    }
+        .stat-item p {
+          font-size: 18px;
+          font-weight: 500;
+          color: #E0E0E0;
+        }
 
-    .badge-display {
-      margin: 20px 0;
-      text-align: center;
-      color: #CCC;
-    }
+        .badge-display {
+          margin: 20px 0;
+          text-align: center;
+          color: #CCC;
+        }
 
-    .badge-display img {
-      height: 100px;
-      width: 100px;
-      object-fit: contain;
-      border-radius: 20px;
-      background-color: #1E1E2E;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease;
-    }
+        .badge-display img {
+          height: 100px;
+          width: 100px;
+          object-fit: contain;
+          border-radius: 20px;
+          background-color: #1E1E2E;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+          transition: transform 0.3s ease;
+        }
 
-    .badge-display img:hover {
-      transform: scale(1.05);
-    }
-    .file-label {
-      display: block;
-      margin-top: 1rem;
-      padding: 0.75rem 1rem;
-      background-color: #50FA7B;
-      color: #1E1E2E;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        .badge-display img:hover {
+          transform: scale(1.05);
+        }
+        .file-label {
+          display: block;
+          margin-top: 1rem;
+          padding: 0.75rem 1rem;
+          background-color: #50FA7B;
+          color: #1E1E2E;
+          font-weight: bold;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
 
-    .file-label:hover {
-      background-color: #45e06e;
-    }
+        .file-label:hover {
+          background-color: #45e06e;
+        }
 
-    input[type="file"] {
-      display: none;
-    }
+        input[type="file"] {
+          display: none;
+        }
 
-    #fileNameDisplay {
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      color: #7CFCB5;
-      font-style: italic;
-    }
+        #fileNameDisplay {
+          margin-top: 0.5rem;
+          font-size: 0.95rem;
+          color: #7CFCB5;
+          font-style: italic;
+        }
 
-    button#importBtn, button#exportBtn {
-      margin-top: 1rem;
-      padding: 0.75rem 1rem;
-      width: 100%;
-      background-color: #50FA7B;
-      color: #1E1E2E;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        button#importBtn, button#exportBtn {
+          margin-top: 1rem;
+          padding: 0.75rem 1rem;
+          width: 100%;
+          background-color: #50FA7B;
+          color: #1E1E2E;
+          font-weight: bold;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
 
-    button#importBtn:hover, button#exportBtn:hover {
-      background-color: #45e06e;
-    }
+        button#importBtn:hover, button#exportBtn:hover {
+          background-color: #45e06e;
+        }
 
-    #status {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      color: #A0FFA0;
-    }
+        #status {
+          margin-top: 1rem;
+          font-size: 0.95rem;
+          color: #A0FFA0;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
 
 <div class="logo">
-  <h1><span>Fridge</span>Sort</h1>
+    <h1><span>Fridge</span>Sort</h1>
 </div>
 
 <div class="profile-container">
-  <h1 id="welcome">Herzlich Willkommen, <span id="userNameFirst">...</span>!</h1>
-  <hr>
-  <h3>Name</h3>
-  <p id="userName">-</p>
+    <h1 id="welcome">Herzlich Willkommen, <span id="userNameFirst">...</span>!</h1>
+    <hr>
+    <h3>Name</h3>
+    <p id="userName">-</p>
 
-  <h3>Nachname</h3>
-  <p id="userLastName">-</p>
+    <h3>Nachname</h3>
+    <p id="userLastName">-</p>
 
-  <h3>Email</h3>
-  <p id="userEmail">-</p>
+    <h3>Email</h3>
+    <p id="userEmail">-</p>
 </div>
 
 <div class="stats-container">
-  <h2>Deine Statistiken</h2>
+    <h2>Deine Statistiken</h2>
 
-  <div class="progress-wrapper">
-    <div class="progress-bar">
-      <div class="progress-fill" style="width: 70%;"></div>
+    <div class="progress-wrapper">
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 70%;"></div>
+        </div>
+        <p class="progress-text">70% Ziel erreicht</p>
     </div>
-    <p class="progress-text">70% Ziel erreicht</p>
-  </div>
 
-  <div class="stat-grid">
-    <div class="stat-item">
-      <h3>Gerettete Lebensmittel</h3>
-      <p id="savedItems">-</p>
+    <div class="stat-grid">
+        <div class="stat-item">
+            <h3>Gerettete Lebensmittel</h3>
+            <p id="savedItems">-</p>
+        </div>
+        <div class="stat-item">
+            <h3>Highscore</h3>
+            <p id="highscore">-</p>
+        </div>
+        <div class="stat-item">
+            <h3>Aktuelle Streak</h3>
+            <p id="streak">-</p>
+        </div>
+        <div class="stat-item">
+            <h3>Streak seit</h3>
+            <p id="streakSince">-</p>
+        </div>
     </div>
-    <div class="stat-item">
-      <h3>Highscore</h3>
-      <p id="highscore">-</p>
-    </div>
-    <div class="stat-item">
-      <h3>Aktuelle Streak</h3>
-      <p id="streak">-</p>
-    </div>
-    <div class="stat-item">
-      <h3>Streak seit</h3>
-      <p id="streakSince">-</p>
-    </div>
-  </div>
 
-  <div class="badge-display stat-item">
-    <h3>Abzeichen</h3>
-    <img id="badgeImage" src="img/badge_unavailable.png" alt="" />
-  </div>
+    <div class="badge-display stat-item">
+        <h3>Abzeichen</h3>
+        <img id="badgeImage" src="img/badge_unavailable.png" alt=""/>
+    </div>
 </div>
 
 <div class="stats-container">
-  <h2>Daten Import / Export</h2>
-  
-  <button id="exportBtn">Daten exportieren</button>
+    <h2>Daten Import / Export</h2>
 
-  <label for="importFile" class="file-label">Datei auswählen</label>
-  <input type="file" id="importFile" accept=".json" />
-  <div id="fileNameDisplay"></div>
+    <button id="exportBtn">Daten exportieren</button>
 
-  <button id="importBtn">Daten importieren</button>
+    <label for="importFile" class="file-label">Datei auswählen</label>
+    <input type="file" id="importFile" accept=".json"/>
+    <div id="fileNameDisplay"></div>
 
-  <div id="status"></div>
+    <button id="importBtn">Daten importieren</button>
+
+    <div id="status"></div>
 </div>
 
 
 <div class="nav">
     <ul>
-        <li><a href="https://www.google.com/maps/search/Geöffnete+Supermärkte+in+meiner+Nähe"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="https://www.google.com/maps/search/Geöffnete+Supermärkte+in+meiner+Nähe"><img
+                src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
         <li><a href="recepies.html"><img src="img/taskbar_book.png" class="rounded imagesize-icons-taskbar"></a></li>
         <li><a href="checklist.html"><img src="img/taskbar_checklist.png" class="rounded imagesize-icons-taskbar"></a>
         </li>
@@ -335,117 +336,117 @@
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const userData = JSON.parse(localStorage.getItem("userLoginData")) || {};
-    document.getElementById("userNameFirst").textContent = userData.name || "-";
-    document.getElementById("userName").textContent = userData.name || "-";
-    document.getElementById("userLastName").textContent = userData.lastName || "-";
-    document.getElementById("userEmail").textContent = userData.email || "-";
+    document.addEventListener("DOMContentLoaded", function () {
+      const userData = JSON.parse(localStorage.getItem("userLoginData")) || {};
+      document.getElementById("userNameFirst").textContent = userData.name || "-";
+      document.getElementById("userName").textContent = userData.name || "-";
+      document.getElementById("userLastName").textContent = userData.lastName || "-";
+      document.getElementById("userEmail").textContent = userData.email || "-";
 
-    const stats = JSON.parse(localStorage.getItem("userStatsData")) || {
-      progress: 0,
-      level: 0,
-      savedItems: 0,
-      streak: 0,
-      highscore: 0,
-      streakSince: new Date().toLocaleDateString("de-DE")
-    };
+      const stats = JSON.parse(localStorage.getItem("userStatsData")) || {
+        progress: 0,
+        level: 0,
+        savedItems: 0,
+        streak: 0,
+        highscore: 0,
+        streakSince: new Date().toLocaleDateString("de-DE")
+      };
 
-    const progressFill = document.querySelector(".progress-fill");
-    const progressText = document.querySelector(".progress-text");
-    const percent = Math.min(parseInt(stats.progress) || 0, 100);
+      const progressFill = document.querySelector(".progress-fill");
+      const progressText = document.querySelector(".progress-text");
+      const percent = Math.min(parseInt(stats.progress) || 0, 100);
 
-    progressFill.style.width = `${percent}%`;
-    progressText.textContent = `${percent}% · Level ${stats.level}`;
+      progressFill.style.width = `${percent}%`;
+      progressText.textContent = `${percent}% · Level ${stats.level}`;
 
-    document.getElementById("savedItems").textContent = stats.savedItems ?? "-";
-    document.getElementById("highscore").textContent = stats.highscore ?? "-";
-    document.getElementById("streak").textContent = stats.streak ?? "-";
-    document.getElementById("streakSince").textContent = stats.streakSince || "-";
+      document.getElementById("savedItems").textContent = stats.savedItems ?? "-";
+      document.getElementById("highscore").textContent = stats.highscore ?? "-";
+      document.getElementById("streak").textContent = stats.streak ?? "-";
+      document.getElementById("streakSince").textContent = stats.streakSince || "-";
 
-    const badgeImg = document.getElementById("badgeImage");
-    const level = stats.level ?? 0;
+      const badgeImg = document.getElementById("badgeImage");
+      const level = stats.level ?? 0;
 
-    if(level == 0){
-    badgeImg.src = `img/badge_unavailable.png`;
-    badgeImg.alt = `Badge not available`;
-    return;
-    }
-
-    let badgeNumber = 1;
-    if (level >= 100) badgeNumber = 10;
-    else if (level >= 50) badgeNumber = 9;
-    else if (level >= 40) badgeNumber = 8;
-    else if (level >= 30) badgeNumber = 7;
-    else if (level >= 20) badgeNumber = 6;
-    else if (level >= 15) badgeNumber = 5;
-    else if (level >= 10) badgeNumber = 4;
-    else if (level >= 5) badgeNumber = 3;
-    else if (level >= 3) badgeNumber = 2;
-
-    badgeImg.src = `img/badge_${badgeNumber}.png`;
-    badgeImg.alt = `Badge ${badgeNumber}`;
-  });
-
-
-  document.getElementById('exportBtn').addEventListener('click', () => {
-  const data = {};
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    data[key] = localStorage.getItem(key);
-  }
-
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'fridgesort-data-export.json';
-  a.click();
-
-  URL.revokeObjectURL(url);
-});
-
-document.getElementById('importFile').addEventListener('change', (event) => {
-  const fileNameDisplay = document.getElementById('fileNameDisplay');
-  const file = event.target.files[0];
-  if (file) {
-    fileNameDisplay.textContent = `Ausgewählte Datei: ${file.name}`;
-  } else {
-    fileNameDisplay.textContent = '';
-  }
-});
-
-document.getElementById('importBtn').addEventListener('click', () => {
-  const fileInput = document.getElementById('importFile');
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert('Bitte eine JSON-Datei auswählen.');
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function(event) {
-    try {
-      const importedData = JSON.parse(event.target.result);
-      let addedCount = 0;
-
-      for (const key in importedData) {
-        if (!localStorage.getItem(key)) {
-          localStorage.setItem(key, importedData[key]);
-          addedCount++;
-        }
+      if(level == 0){
+      badgeImg.src = `img/badge_unavailable.png`;
+      badgeImg.alt = `Badge not available`;
+      return;
       }
 
-      document.getElementById('status').innerText = `${addedCount} neue Einträge importiert.`;
-    } catch (err) {
-      alert('Fehler beim Importieren der Datei: ' + err.message);
-    }
-  };
+      let badgeNumber = 1;
+      if (level >= 100) badgeNumber = 10;
+      else if (level >= 50) badgeNumber = 9;
+      else if (level >= 40) badgeNumber = 8;
+      else if (level >= 30) badgeNumber = 7;
+      else if (level >= 20) badgeNumber = 6;
+      else if (level >= 15) badgeNumber = 5;
+      else if (level >= 10) badgeNumber = 4;
+      else if (level >= 5) badgeNumber = 3;
+      else if (level >= 3) badgeNumber = 2;
 
-  reader.readAsText(file);
-});
+      badgeImg.src = `img/badge_${badgeNumber}.png`;
+      badgeImg.alt = `Badge ${badgeNumber}`;
+    });
+
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      data[key] = localStorage.getItem(key);
+    }
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'fridgesort-data-export.json';
+    a.click();
+
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('importFile').addEventListener('change', (event) => {
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const file = event.target.files[0];
+    if (file) {
+      fileNameDisplay.textContent = `Ausgewählte Datei: ${file.name}`;
+    } else {
+      fileNameDisplay.textContent = '';
+    }
+  });
+
+  document.getElementById('importBtn').addEventListener('click', () => {
+    const fileInput = document.getElementById('importFile');
+    const file = fileInput.files[0];
+
+    if (!file) {
+      alert('Bitte eine JSON-Datei auswählen.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      try {
+        const importedData = JSON.parse(event.target.result);
+        let addedCount = 0;
+
+        for (const key in importedData) {
+          if (!localStorage.getItem(key)) {
+            localStorage.setItem(key, importedData[key]);
+            addedCount++;
+          }
+        }
+
+        document.getElementById('status').innerText = `${addedCount} neue Einträge importiert.`;
+      } catch (err) {
+        alert('Fehler beim Importieren der Datei: ' + err.message);
+      }
+    };
+
+    reader.readAsText(file);
+  });
 </script>
 </body>
 </html>

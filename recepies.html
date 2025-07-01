@@ -1,133 +1,137 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page responsive on mobile devices -->
-  <style>
-    body {
-      margin: 0; /* Removes default margin around the page */
-      height: 100vh; /* Makes the body take up the full height of the viewport */
-      background-color: #1E1E2E; /* Dark background color */
-      color: #E0E0E0; /* Light gray text color */
-      display: flex; /* Enables Flexbox layout */
-      flex-direction: column; /* Aligns children vertically */
-      overflow: auto; /* Allows scrolling if content overflows */
-      display: block; /* Prevents body from being restricted to 100vh */
-      padding-bottom: 100px; /* Adds space for the navbar at the bottom */
-      padding-top: 0px; /* Removes any space at the top */
-    }
+    <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Makes the page responsive on mobile devices -->
+    <style>
+        body {
+          margin: 0; /* Removes default margin around the page */
+          height: 100vh; /* Makes the body take up the full height of the viewport */
+          background-color: #1E1E2E; /* Dark background color */
+          color: #E0E0E0; /* Light gray text color */
+          display: flex; /* Enables Flexbox layout */
+          flex-direction: column; /* Aligns children vertically */
+          overflow: auto; /* Allows scrolling if content overflows */
+          display: block; /* Prevents body from being restricted to 100vh */
+          padding-bottom: 100px; /* Adds space for the navbar at the bottom */
+          padding-top: 0px; /* Removes any space at the top */
+        }
 
-    * {
-      padding: 0; /* Removes padding from all elements */
-      margin: 0; /* Removes margin from all elements */
-      box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
-    }
+        * {
+          padding: 0; /* Removes padding from all elements */
+          margin: 0; /* Removes margin from all elements */
+          box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
+        }
 
-    .logo {
-      background-color: #1E1E2E; /* Same color as the body background */
-      color: #E0E0E0; /* Light gray color for the text */
-      text-align: center; /* Centers the text horizontally */
-      padding: 20px 0; /* Adds vertical padding */
-      font-size: 36px; /* Sets large font size for the logo */
-      font-weight: bold; /* Makes the logo text bold */
-      letter-spacing: 2px; /* Adds space between the letters */
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Adds shadow to make the logo pop */
-      z-index: 1000; /* Ensures the logo stays on top */
-    }
-    .logo span {
-      color: #50FA7B; /* Changes the color of the "Sort" part of the logo */
-    }
+        .logo {
+          background-color: #1E1E2E; /* Same color as the body background */
+          color: #E0E0E0; /* Light gray color for the text */
+          text-align: center; /* Centers the text horizontally */
+          padding: 20px 0; /* Adds vertical padding */
+          font-size: 36px; /* Sets large font size for the logo */
+          font-weight: bold; /* Makes the logo text bold */
+          letter-spacing: 2px; /* Adds space between the letters */
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Adds shadow to make the logo pop */
+          z-index: 1000; /* Ensures the logo stays on top */
+        }
+        .logo span {
+          color: #50FA7B; /* Changes the color of the "Sort" part of the logo */
+        }
 
-    .bottom-right-item-add-button {
-      position: fixed; /* Fixes the button at a specific position on the screen */
-      bottom: 100px; /* Positions the button 100px from the bottom */
-      right: 10px; /* Positions the button 10px from the right */
-    }
+        .bottom-right-item-add-button {
+          position: fixed; /* Fixes the button at a specific position on the screen */
+          bottom: 100px; /* Positions the button 100px from the bottom */
+          right: 10px; /* Positions the button 10px from the right */
+        }
 
-    .imagesize-item-add-button {
-      height: 75px; /* Sets the button height */
-    }
+        .imagesize-item-add-button {
+          height: 75px; /* Sets the button height */
+        }
 
-    .modal {
-      display: none; /* Hides the modal by default */
-      position: fixed; /* Fixes the modal at the top of the screen */
-      top: 0; /* Positions the modal at the top */
-      left: 0; /* Positions the modal at the left */
-      width: 100%; /* Makes the modal take up the full width */
-      height: 100%; /* Makes the modal take up the full height */
-      background-color: #282A36; /* Dark background color */
-      color: #E0E0E0; /* Light gray text color */
-      align-items: center; /* Centers content vertically */
-      justify-content: center; /* Centers content horizontally */
-    }
+        .modal {
+          display: none; /* Hides the modal by default */
+          position: fixed; /* Fixes the modal at the top of the screen */
+          top: 0; /* Positions the modal at the top */
+          left: 0; /* Positions the modal at the left */
+          width: 100%; /* Makes the modal take up the full width */
+          height: 100%; /* Makes the modal take up the full height */
+          background-color: #282A36; /* Dark background color */
+          color: #E0E0E0; /* Light gray text color */
+          align-items: center; /* Centers content vertically */
+          justify-content: center; /* Centers content horizontally */
+        }
 
-    .modal-content {
-      background-color: white; /* White background for the modal content */
-      padding: 20px; /* Adds padding inside the modal */
-      border-radius: 10px; /* Rounds the corners of the modal */
-      width: 300px; /* Sets a fixed width for the modal */
-      display: flex; /* Uses Flexbox layout for the modal content */
-      flex-direction: column; /* Aligns modal content vertically */
-    }
-    .rounded {
-      border-radius: 10px; /* Rounds the corners of elements */
-    }
-    .smallimage {
-      height: 100px; /* Sets height for small images */
-    }
-    .imagesize-icons-taskbar {
-      height: 50px; /* Sets height for taskbar icons */
-    }
-    .nav {
-      width: 100%; /* Makes the navbar span the full width */
-      text-align: center; /* Centers navbar items */
-      background: #1E1E2E; /* Matches the page background color */
-      position: fixed; /* Fixes the navbar to the bottom of the screen */
-      left: 0; /* Positions the navbar at the left */
-      bottom: 0; /* Positions the navbar at the bottom */
-      box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
-      z-index: 1000; /* Ensures navbar stays on top */
-      height: 55px; /* Sets navbar height */
-    }
+        .modal-content {
+          background-color: white; /* White background for the modal content */
+          padding: 20px; /* Adds padding inside the modal */
+          border-radius: 10px; /* Rounds the corners of the modal */
+          width: 300px; /* Sets a fixed width for the modal */
+          display: flex; /* Uses Flexbox layout for the modal content */
+          flex-direction: column; /* Aligns modal content vertically */
+        }
+        .rounded {
+          border-radius: 10px; /* Rounds the corners of elements */
+        }
+        .smallimage {
+          height: 100px; /* Sets height for small images */
+        }
+        .imagesize-icons-taskbar {
+          height: 50px; /* Sets height for taskbar icons */
+        }
+        .nav {
+          width: 100%; /* Makes the navbar span the full width */
+          text-align: center; /* Centers navbar items */
+          background: #1E1E2E; /* Matches the page background color */
+          position: fixed; /* Fixes the navbar to the bottom of the screen */
+          left: 0; /* Positions the navbar at the left */
+          bottom: 0; /* Positions the navbar at the bottom */
+          box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
+          z-index: 1000; /* Ensures navbar stays on top */
+          height: 55px; /* Sets navbar height */
+        }
 
-    .nav ul {
-      list-style-type: none; /* Removes bullets from list items */
-      padding: 0; /* Removes padding */
-      margin: 0; /* Removes margin */
-      display: flex; /* Enables Flexbox layout */
-      justify-content: space-evenly; /* Distributes navbar items evenly */
-      width: 100%; /* Makes the navbar span the full width */
-      height: 100%; /* Ensures icons fill the navbar */
-    }
+        .nav ul {
+          list-style-type: none; /* Removes bullets from list items */
+          padding: 0; /* Removes padding */
+          margin: 0; /* Removes margin */
+          display: flex; /* Enables Flexbox layout */
+          justify-content: space-evenly; /* Distributes navbar items evenly */
+          width: 100%; /* Makes the navbar span the full width */
+          height: 100%; /* Ensures icons fill the navbar */
+        }
 
-    .nav ul li {
-      display: inline-block; /* Displays list items inline */
-    }
+        .nav ul li {
+          display: inline-block; /* Displays list items inline */
+        }
 
-    .nav ul li .nav-link {
-      text-decoration: none; /* Removes underline from links */
-      color: #ccc; /* Sets link color */
-      padding: 15px; /* Adds padding around the links */
-      display: block; /* Makes links block elements */
-    }
-  </style>
+        .nav ul li .nav-link {
+          text-decoration: none; /* Removes underline from links */
+          color: #ccc; /* Sets link color */
+          padding: 15px; /* Adds padding around the links */
+          display: block; /* Makes links block elements */
+        }
+    </style>
 </head>
- 
+
 <body>
 
-  <div class="logo">
+<div class="logo">
     <h1><span>Fridge</span>Sort</h1> <!-- Logo text -->
-  </div>
+</div>
 
-  <div class="nav">
+<div class="nav">
     <ul>
-      <li><a href="https://www.google.com/maps/search/Geöffnete+Supermärkte+in+meiner+Nähe"><img src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="recepies.html"><img src="img/taskbar_book.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="checklist.html"><img src="img/taskbar_checklist.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="shop.html"><img src="img/taskbar_shopping_car.png" class="rounded imagesize-icons-taskbar"></a></li>
-      <li><a href="profile.html"><img src="img/taskbar_profile.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="https://www.google.com/maps/search/Geöffnete+Supermärkte+in+meiner+Nähe"><img
+                src="img/taskbar_map.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="recepies.html"><img src="img/taskbar_book.png" class="rounded imagesize-icons-taskbar"></a></li>
+        <li><a href="checklist.html"><img src="img/taskbar_checklist.png" class="rounded imagesize-icons-taskbar"></a>
+        </li>
+        <li><a href="shop.html"><img src="img/taskbar_shopping_car.png" class="rounded imagesize-icons-taskbar"></a>
+        </li>
+        <li><a href="profile.html"><img src="img/taskbar_profile.png" class="rounded imagesize-icons-taskbar"></a></li>
     </ul>
-  </div>  
+</div>
 
 </body>
 <script>
