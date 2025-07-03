@@ -1,17 +1,17 @@
-document.addEventListener("DOMContentLoaded", displayShopItems); // Lädt gespeicherte Items beim Start
+document.addEventListener("DOMContentLoaded", displayShopItems); 
 
 function displayShopItems(){
     let shopList = document.getElementById("shopList");
 
-    shopList.innerHTML = ""; // Liste leeren
+    shopList.innerHTML = "";
     let shopItems = JSON.parse(localStorage.getItem("shopList")) || [];
 
     if (shopItems.length < 1) {
-        // Wenn keine Items da sind, füge eine freundliche Nachricht ein
+        // insert message if array is empty
         let noItemsMessage = document.createElement("div");
         noItemsMessage.style.textAlign = "center";
         noItemsMessage.style.padding = "40px 20px";
-        noItemsMessage.style.color = "#50FA7B"; // grüne Farbe passend zum Design
+        noItemsMessage.style.color = "#50FA7B";
         noItemsMessage.style.fontSize = "1.4rem";
         noItemsMessage.style.fontStyle = "italic";
         noItemsMessage.innerHTML = `Die Einkaufsliste ist leer 🛒`;
