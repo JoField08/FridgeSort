@@ -14,7 +14,7 @@ function displayShopItems(){
         noItemsMessage.style.color = "#50FA7B"; // grüne Farbe passend zum Design
         noItemsMessage.style.fontSize = "1.4rem";
         noItemsMessage.style.fontStyle = "italic";
-        noItemsMessage.innerHTML = `Du hast bereits alles im Haus 🛒`;
+        noItemsMessage.innerHTML = `Die Einkaufsliste ist leer 🛒`;
         noItemsMessage.onclick = () => {
             window.location.href = "checklist.html";
         }
@@ -44,7 +44,7 @@ function deleteShopItem() {
     let uuid = document.getElementById("shopItemDetailModal").getAttribute("data-uuid");
     let shopItems = JSON.parse(localStorage.getItem("shopList")) || [];
 
-    let itemToDelete = shopItems.find(item => item.uuid === uuid); // 👈 Finde das Item zuerst
+    let itemToDelete = shopItems.find(item => item.uuid === uuid); // find Item
 
     shopItems = shopItems.filter(item => item.uuid !== uuid);
     localStorage.setItem("shopList", JSON.stringify(shopItems));
@@ -60,14 +60,13 @@ function openShopItemDetailModal(item) {
     document.getElementById("shopModalDescription").textContent = item.description || "";
     document.getElementById("shopModalUsedAt").textContent = item.usedAt;
 
-    // Speichere die UUID im Modal als Attribut
-    document.getElementById("shopItemDetailModal").setAttribute("data-uuid", item.uuid);
+    document.getElementById("shopItemDetailModal").setAttribute("data-uuid", item.uuid); //save uuid as attribut in modal
 }
 
 
 function closeShopItemDetailModal(item){
-    displayShopItems(); // Zeigt die geänderte Liste an
-    document.getElementById("shopItemDetailModal").style.display = "none"; // schließt modal
+    displayShopItems(); 
+    document.getElementById("shopItemDetailModal").style.display = "none"; // close modal
 
 }
 function openShop(){
