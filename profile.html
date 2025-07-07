@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script defer src="registerscript.js"></script>
-    <style>
+     <style>
         body {
           margin: 0;
           background-color: #1E1E2E;
@@ -250,6 +250,23 @@
           font-size: 0.95rem;
           color: #A0FFA0;
         }
+        button#deleteData {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  background-color: #FF5555; /* Rot als Warnfarbe */
+  color: #1E1E2E;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button#deleteData:hover {
+  background-color: #e04a4a; /* Etwas dunkleres Rot beim Hover */
+}
+
 
     </style>
 </head>
@@ -308,7 +325,7 @@
 </div>
 
 <div class="stats-container">
-    <h2>Daten Import / Export</h2>
+    <h2>Datenverwaltung</h2>
 
     <button id="exportBtn">Daten exportieren</button>
 
@@ -319,6 +336,8 @@
     <button id="importBtn">Daten importieren</button>
 
     <div id="status"></div>
+
+    <button id="deleteData" onclick="deleteAllData()" class="">Daten löschen</button>
 </div>
 
 
@@ -448,6 +467,9 @@
 
     reader.readAsText(file);
   });
+  function deleteAllData(){
+    localStorage.clear();
+  }
 </script>
 </body>
 </html>
