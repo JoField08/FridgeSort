@@ -91,6 +91,8 @@
     <button id="importBtn">Daten importieren</button>
 
     <div id="status"></div>
+
+    <button id="addExampleItemsBtn">Beispiele importieren</button>
 </div>
 
 <script>
@@ -152,6 +154,52 @@
 
       reader.readAsText(file);
     });
+
+    document.getElementById('addExampleItemsBtn').addEventListener('click', () => {
+     const exampleItems = [
+    {"name":"Eier","description":"Freilandhaltung","current":"2025-07-07","expiry":"2025-07-21","autoShop":true,"uuid":"1a88c012-b7fc-4763-b04c-91f71f38c4a6"},
+    {"name":"Butter","description":"Süßrahm","current":"2025-07-03","expiry":"2025-08-01","autoShop":false,"uuid":"597f7b57-5c1a-4957-97c1-b8a1d9e6f5cb"},
+    {"name":"Käse","description":"Gouda jung","current":"2025-07-09","expiry":"2025-07-18","autoShop":false,"uuid":"d324a3ea-9ac0-4ba4-8c92-33099312e09c"},
+    {"name":"Joghurt","description":"Erdbeer","current":"2025-07-06","expiry":"2025-07-13","autoShop":true,"uuid":"bc86e3e9-d5c6-4ae7-a99f-e8de6a7d1e99"},
+    {"name":"Äpfel","description":"Bio, rot","current":"2025-07-04","expiry":"2025-07-15","autoShop":false,"uuid":"f3198b0b-707e-45ef-967e-f226b58a3912"},
+    {"name":"Bananen","description":"Chiquita","current":"2025-07-08","expiry":"2025-07-12","autoShop":true,"uuid":"12cd34f5-343a-43ee-987f-d7d72d9f1ef9"},
+    {"name":"Kartoffeln","description":"festkochend","current":"2025-07-02","expiry":"2025-08-01","autoShop":false,"uuid":"7de5b8b6-9a89-46dc-988d-cc3b3e2f8d00"},
+    {"name":"Karotten","description":"Bio","current":"2025-07-01","expiry":"2025-07-14","autoShop":false,"uuid":"b61c4071-3788-4d6f-983b-02aa2f9f6870"},
+    {"name":"Tomaten","description":"Roma","current":"2025-07-05","expiry":"2025-07-10","autoShop":true,"uuid":"68b8e1be-b4c5-4f53-91e7-e7809271b4ad"},
+    {"name":"Gurken","description":"Salatgurke","current":"2025-07-06","expiry":"2025-07-11","autoShop":false,"uuid":"9a36d761-7888-4038-bdfc-0380b2c38851"},
+    {"name":"Paprika","description":"gelb, rot","current":"2025-07-03","expiry":"2025-07-13","autoShop":true,"uuid":"f088de62-4350-4c77-a928-88d9f8b8e63d"},
+    {"name":"Zwiebeln","description":"gelb","current":"2025-07-02","expiry":"2025-07-30","autoShop":false,"uuid":"735b4168-c0c3-41fd-84e1-5bca8e0f85ae"},
+    {"name":"Knoblauch","description":"frisch","current":"2025-07-01","expiry":"2025-08-01","autoShop":false,"uuid":"e7f0222c-72b5-4f4d-9c5d-e2ae93ea71a6"},
+    {"name":"Spinat","description":"tiefgekühlt","current":"2025-06-25","expiry":"2026-01-01","autoShop":true,"uuid":"cc6229a9-8cb3-4dc1-9019-2f491826939f"},
+    {"name":"Fischstäbchen","description":"Iglo","current":"2025-07-08","expiry":"2026-03-10","autoShop":true,"uuid":"2a6b5f6a-4588-4c92-bf2f-9f1bd5d9ad50"},
+    {"name":"Hackfleisch","description":"Rind, 500g","current":"2025-07-09","expiry":"2025-07-10","autoShop":false,"uuid":"6a734d60-0fbd-4a69-9ac3-9b0711e3cd0f"},
+    {"name":"Hähnchenbrust","description":"frisch","current":"2025-07-05","expiry":"2025-07-09","autoShop":true,"uuid":"acfe9cc6-4499-42b5-bb2f-bc2337e6dc68"},
+    {"name":"Reis","description":"Langkorn","current":"2025-06-15","expiry":"2026-06-30","autoShop":false,"uuid":"f28cfd2f-8aa7-45ff-87aa-4ed4b90a8a0b"},
+    {"name":"Nudeln","description":"Penne","current":"2025-07-01","expiry":"2027-01-01","autoShop":true,"uuid":"93efb3f4-7e9c-4093-9134-8582ebc7fc76"},
+    {"name":"Tomatensauce","description":"Basilikum","current":"2025-07-08","expiry":"2026-02-01","autoShop":false,"uuid":"b1f06613-0502-4e2f-b6c6-60431e5a06e4"},
+    {"name":"Öl","description":"Olivenöl","current":"2025-05-01","expiry":"2027-05-01","autoShop":true,"uuid":"90a2e7e9-cffe-4f7c-b5df-f275ca2a4b38"},
+    {"name":"Mehl","description":"Weizen, Type 405","current":"2025-06-10","expiry":"2026-06-10","autoShop":false,"uuid":"c3a29588-2b66-4dd6-ae8b-54f5d50d5bd7"},
+    {"name":"Zucker","description":"weiß","current":"2025-05-15","expiry":"2026-12-31","autoShop":true,"uuid":"cf0b9ab1-0a75-4b69-905b-334c4e79c4c3"},
+    {"name":"Honig","description":"Blütenhonig","current":"2025-07-01","expiry":"2026-12-01","autoShop":false,"uuid":"38a7a398-cfb3-4ab1-bbfc-6be3052124fd"},
+    {"name":"Marmelade","description":"Himbeer","current":"2025-06-20","expiry":"2025-12-01","autoShop":true,"uuid":"fa3bc99e-6b27-4c64-b812-15cc3108aa90"},
+    {"name":"Kaffee","description":"gemahlen","current":"2025-07-03","expiry":"2026-01-01","autoShop":false,"uuid":"061e67ae-2ee1-453c-8607-5b01b9b5dce9"},
+    {"name":"Tee","description":"Grüntee","current":"2025-07-04","expiry":"2026-04-01","autoShop":false,"uuid":"7f2fe0d7-b6f7-4695-9c52-15ab633f5aa6"},
+    {"name":"Saft","description":"Orangensaft","current":"2025-07-07","expiry":"2025-07-21","autoShop":true,"uuid":"1d19d2e6-8dd5-4f17-9b3d-61e0dd8984dc"},
+    {"name":"Wasser","description":"Mineralwasser","current":"2025-07-06","expiry":"2026-07-06","autoShop":true,"uuid":"79223e95-d7e9-4178-a4c5-7337b7bbf775"}
+  ];
+
+  let foodList = JSON.parse(localStorage.getItem('foodList') || '[]');
+
+  const existingUUIDs = new Set(foodList.map(item => item.uuid));
+
+  const newItems = exampleItems.filter(item => !existingUUIDs.has(item.uuid));
+  foodList = foodList.concat(newItems);
+
+  localStorage.setItem('foodList', JSON.stringify(foodList));
+
+  document.getElementById('status').innerText = `${newItems.length} neue Items wurden zur foodList hinzugefügt.`;
+});
+
 </script>
 </body>
 </html>
