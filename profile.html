@@ -387,12 +387,6 @@ button#deleteData:hover {
       const badgeImg = document.getElementById("badgeImage");
       const level = stats.level ?? 0;
 
-      if(level == 0){
-      badgeImg.src = `img/badge_unavailable.png`;
-      badgeImg.alt = `Badge not available`;
-      return;
-      }
-
       let badgeNumber = 1;
       if (level >= 100) badgeNumber = 10;
       else if (level >= 50) badgeNumber = 9;
@@ -404,7 +398,7 @@ button#deleteData:hover {
       else if (level >= 5) badgeNumber = 3;
       else if (level >= 3) badgeNumber = 2;
 
-      badgeImg.src = `img/badge_${badgeNumber}.png`;
+      badgeImg.src = `img/badges/badge_${badgeNumber}.png`;
       badgeImg.alt = `Badge ${badgeNumber}`;
     });
 
