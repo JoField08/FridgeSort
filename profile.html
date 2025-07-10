@@ -6,21 +6,22 @@
     <script defer src="registerscript.js"></script>
     <style>
         body {
-          margin: 0;
-          background-color: #1E1E2E;
-          color: #E0E0E0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding-bottom: 100px;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; /* Removes default margin around the page */
+            height: 100vh; /* Makes the body take up the full height of the viewport */
+            background-color: #1E1E2E; /* Dark background color */
+            color: #E0E0E0; /* Light gray text color */
+            display: flex; /* Enables Flexbox layout */
+            flex-direction: column; /* Aligns children vertically */
+            overflow: auto; /* Allows scrolling if content overflows */
+            display: block; /* Prevents body from being restricted to 100vh */
+            padding-bottom: 100px; /* Adds space for the navbar at the bottom */
+            padding-top: 0px; /* Removes any space at the top */
         }
 
         * {
-          padding: 0;
-          margin: 0;
-          box-sizing: border-box;
+            padding: 0; /* Removes padding from all elements */
+            margin: 0; /* Removes margin from all elements */
+            box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
         }
 
         .logo {
@@ -37,6 +38,72 @@
 
         .logo span {
           color: #50FA7B;
+        }
+
+        .nav {
+          width: 100%; /* Makes the navbar span the full width */
+          text-align: center; /* Centers navbar items */
+          background: #1E1E2E; /* Matches the page background color */
+          position: fixed; /* Fixes the navbar to the bottom of the screen */
+          left: 0; /* Positions the navbar at the left */
+          bottom: 0; /* Positions the navbar at the bottom */
+          box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
+          z-index: 1000; /* Ensures navbar stays on top */
+          height: 55px; /* Sets navbar height */
+        }
+
+        .nav ul {
+          list-style-type: none; /* Removes bullets from list items */
+          padding: 0; /* Removes padding */
+          margin: 0; /* Removes margin */
+          display: flex; /* Enables Flexbox layout */
+          justify-content: space-evenly; /* Distributes navbar items evenly */
+          width: 100%; /* Makes the navbar span the full width */
+          height: 100%; /* Ensures icons fill the navbar */
+        }
+
+        .nav ul li {
+          display: inline-block; /* Displays list items inline */
+        }
+
+        .nav ul li .nav-link {
+          text-decoration: none; /* Removes underline from links */
+          color: #ccc; /* Sets link color */
+          padding: 15px; /* Adds padding around the links */
+          display: block; /* Makes links block elements */
+        }
+        .imagesize-icons-taskbar {
+          height: 50px; /* Sets height for taskbar icons */
+        }
+        .inventory-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin: 20px 20px 10px 20px;
+        }
+
+        .inventory-header h1 {
+          color: #50FA7B;
+          font-weight: 600;
+          font-size: 3.2rem;
+          white-space: nowrap;
+        }
+
+        .inventory-header .line {
+          flex-grow: 1;
+          border: none;
+          border-bottom: 1.5px solid #50FA7B;
+          opacity: 0.3;
+        }
+
+        .content-centered {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          padding-bottom: 80px;
+          overflow-y: auto;
         }
 
         .profile-container {
@@ -77,49 +144,6 @@
           height: 1px;
           background-color: #444;
           margin: 15px 0;
-        }
-
-        .rounded {
-          border-radius: 10px; /* Rounds the corners of elements */
-        }
-        .imagesize-icons-taskbar {
-          height: 50px; /* Sets height for taskbar icons */
-        }
-
-        .nav {
-          width: 100%; /* Makes the navbar span the full width */
-          text-align: center; /* Centers navbar items */
-          background: #1E1E2E; /* Matches the page background color */
-          position: fixed; /* Fixes the navbar to the bottom of the screen */
-          left: 0; /* Positions the navbar at the left */
-          bottom: 0; /* Positions the navbar at the bottom */
-          box-shadow: 0px -5px 5px -2px rgba(0, 0, 0, 0.2); /* Adds shadow for effect */
-          z-index: 1000; /* Ensures navbar stays on top */
-          height: 55px; /* Sets navbar height */
-        }
-
-        .nav ul {
-          list-style-type: none; /* Removes bullets from list items */
-          padding: 0; /* Removes padding */
-          margin: 0; /* Removes margin */
-          display: flex; /* Enables Flexbox layout */
-          justify-content: space-evenly; /* Distributes navbar items evenly */
-          width: 100%; /* Makes the navbar span the full width */
-          height: 100%; /* Ensures icons fill the navbar */
-        }
-
-        .nav ul li {
-          display: inline-block; /* Displays list items inline */
-        }
-
-        .nav ul li .nav-link {
-          text-decoration: none; /* Removes underline from links */
-          color: #ccc; /* Sets link color */
-          padding: 15px; /* Adds padding around the links */
-          display: block; /* Makes links block elements */
-        }
-        .content-centered{
-          text-align: center;
         }
         .stats-container {
           margin-top: 30px;
@@ -250,46 +274,23 @@
           font-size: 0.95rem;
           color: #A0FFA0;
         }
-
         button#deleteData {
-          margin-top: 1rem;
-          padding: 0.75rem 1rem;
-          width: 100%;
-          background-color: #FF5555; /* Rot als Warnfarbe */
-          color: #1E1E2E;
-          font-weight: bold;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-       }
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  background-color: #FF5555; /* Rot als Warnfarbe */
+  color: #1E1E2E;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-        button#deleteData:hover {
-          background-color: #e04a4a; /* Etwas dunkleres Rot beim Hover */
-        }
+button#deleteData:hover {
+  background-color: #e04a4a;
 
-        .inventory-header {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          margin: 20px 20px 10px 20px;
-          width: 100%;
-        }
 
-        .inventory-header h1 {
-          color: #50FA7B;
-          font-weight: 600;
-          font-size: 3.2rem;
-          white-space: nowrap;
-        }
-
-        .inventory-header .line {
-          flex-grow: 1;
-          border: none;
-          border-bottom: 1.5px solid #50FA7B;
-          opacity: 0.3;
-        }
     </style>
 </head>
 <body>
@@ -304,68 +305,70 @@
     <hr class="line"/>
 </div>
 
-<div class="profile-container">
-    <h1 id="welcome">Herzlich Willkommen, <span id="userNameFirst">...</span>!</h1>
-    <hr>
-    <h3>Name</h3>
-    <p id="userName">-</p>
+<div class="content-centered">
 
-    <h3>Nachname</h3>
-    <p id="userLastName">-</p>
+    <div class="profile-container">
+        <h1 id="welcome">Herzlich Willkommen, <span id="userNameFirst">...</span>!</h1>
+        <hr>
+        <h3>Name</h3>
+        <p id="userName">-</p>
 
-    <h3>Email</h3>
-    <p id="userEmail">-</p>
-</div>
+        <h3>Nachname</h3>
+        <p id="userLastName">-</p>
 
-<div class="stats-container">
-    <h2>Deine Statistiken</h2>
-
-    <div class="progress-wrapper">
-        <div class="progress-bar">
-            <div class="progress-fill" style="width: 70%;"></div>
-        </div>
-        <p class="progress-text">70% Ziel erreicht</p>
+        <h3>Email</h3>
+        <p id="userEmail">-</p>
     </div>
 
-    <div class="stat-grid">
-        <div class="stat-item">
-            <h3>Gerettete Lebensmittel</h3>
-            <p id="savedItems">-</p>
+    <div class="stats-container">
+        <h2>Deine Statistiken</h2>
+
+        <div class="progress-wrapper">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 70%;"></div>
+            </div>
+            <p class="progress-text">70% Ziel erreicht</p>
         </div>
-        <div class="stat-item">
-            <h3>Highscore</h3>
-            <p id="highscore">-</p>
+
+        <div class="stat-grid">
+            <div class="stat-item">
+                <h3>Gerettete Lebensmittel</h3>
+                <p id="savedItems">-</p>
+            </div>
+            <div class="stat-item">
+                <h3>Highscore</h3>
+                <p id="highscore">-</p>
+            </div>
+            <div class="stat-item">
+                <h3>Aktuelle Streak</h3>
+                <p id="streak">-</p>
+            </div>
+            <div class="stat-item">
+                <h3>Streak seit</h3>
+                <p id="streakSince">-</p>
+            </div>
         </div>
-        <div class="stat-item">
-            <h3>Aktuelle Streak</h3>
-            <p id="streak">-</p>
-        </div>
-        <div class="stat-item">
-            <h3>Streak seit</h3>
-            <p id="streakSince">-</p>
+
+        <div class="badge-display stat-item">
+            <h3>Abzeichen</h3>
+            <img id="badgeImage" src="img/badge_unavailable.png" alt=""/>
         </div>
     </div>
+    <div class="stats-container">
+        <h2>Datenverwaltung</h2>
 
-    <div class="badge-display stat-item">
-        <h3>Abzeichen</h3>
-        <img id="badgeImage" src="img/badge_unavailable.png" alt=""/>
+        <button id="exportBtn">Daten exportieren</button>
+
+        <label for="importFile" class="file-label">Datei auswählen</label>
+        <input type="file" id="importFile" accept=".json"/>
+        <div id="fileNameDisplay"></div>
+
+        <button id="importBtn">Daten importieren</button>
+
+        <div id="status"></div>
+
+        <button id="deleteData" onclick="deleteAllData()" class="">Daten löschen</button>
     </div>
-</div>
-
-<div class="stats-container">
-    <h2>Datenverwaltung</h2>
-
-    <button id="exportBtn">Daten exportieren</button>
-
-    <label for="importFile" class="file-label">Datei auswählen</label>
-    <input type="file" id="importFile" accept=".json"/>
-    <div id="fileNameDisplay"></div>
-
-    <button id="importBtn">Daten importieren</button>
-
-    <div id="status"></div>
-
-    <button id="deleteData" onclick="deleteAllData()" class="">Daten löschen</button>
 </div>
 
 
