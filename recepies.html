@@ -111,6 +111,51 @@
           padding: 15px; /* Adds padding around the links */
           display: block; /* Makes links block elements */
         }
+
+        .inventory-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #50FA7B; /* Frische grüne Farbe passend zum Logo */
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin: 20px 0 10px 0;
+       }
+        .inventory-header hr {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 1.5px solid #50FA7B;
+            margin-left: 15px;
+            opacity: 0.3;
+        }
+
+        .loader {
+          margin-top: 30px;
+          width: 48px;
+          height: 48px;
+          border: 5px solid #50FA7B;
+          border-bottom-color: transparent;
+          border-radius: 50%;
+          animation: rotate 1s linear infinite;
+        }
+
+        @keyframes rotate {
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        .loading-container {
+          position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px; /* Abstand zwischen Kreis und Text */
+        }
     </style>
 </head>
 
@@ -118,6 +163,16 @@
 
 <div class="logo">
     <h1><span>Fridge</span>Sort</h1> <!-- Logo text -->
+</div>
+
+<div class="inventory-header">
+    <h2> Rezeptvorschläge</h2>
+    <hr/>
+</div>
+
+<div class="loading-container">
+    <div class="loader"></div>
+    <p>Hieran wird noch gearbeitet...</p>
 </div>
 
 <div class="nav">
