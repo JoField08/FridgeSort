@@ -250,30 +250,58 @@
           font-size: 0.95rem;
           color: #A0FFA0;
         }
+
         button#deleteData {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  width: 100%;
-  background-color: #FF5555; /* Rot als Warnfarbe */
-  color: #1E1E2E;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+          margin-top: 1rem;
+          padding: 0.75rem 1rem;
+          width: 100%;
+          background-color: #FF5555; /* Rot als Warnfarbe */
+          color: #1E1E2E;
+          font-weight: bold;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+       }
 
-button#deleteData:hover {
-  background-color: #e04a4a; /* Etwas dunkleres Rot beim Hover */
-}
+        button#deleteData:hover {
+          background-color: #e04a4a; /* Etwas dunkleres Rot beim Hover */
+        }
 
+        .inventory-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin: 20px 20px 10px 20px;
+          width: 100%;
+        }
 
+        .inventory-header h1 {
+          color: #50FA7B;
+          font-weight: 600;
+          font-size: 3.2rem;
+          white-space: nowrap;
+        }
+
+        .inventory-header .line {
+          flex-grow: 1;
+          border: none;
+          border-bottom: 1.5px solid #50FA7B;
+          opacity: 0.3;
+        }
     </style>
 </head>
 <body>
 
 <div class="logo">
     <h1><span>Fridge</span>Sort</h1>
+</div>
+
+<div class="inventory-header">
+    <hr class="line"/>
+    <h1>Dein Profil</h1>
+    <hr class="line"/>
 </div>
 
 <div class="profile-container">

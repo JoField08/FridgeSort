@@ -265,17 +265,20 @@
           align-items: center;
           justify-content: center;
           gap: 10px;
-          color: #50FA7B; /* Frische grüne Farbe passend zum Logo */
+          margin: 20px 20px 10px 20px;
+          }
+
+        .inventory-header h1 {
+          color: #50FA7B;
           font-weight: 600;
-          font-size: 1.8rem;
-          margin: 20px 0 10px 0;
+          font-size: 3.2rem;
+          white-space: nowrap;
         }
 
-        .inventory-header hr {
+        .inventory-header .line {
           flex-grow: 1;
           border: none;
           border-bottom: 1.5px solid #50FA7B;
-          margin-left: 15px;
           opacity: 0.3;
         }
 
@@ -342,8 +345,9 @@
 </div>
 
 <div class="inventory-header">
-    <h2>Aktuelle Einkaufsliste</h2>
-    <hr/>
+    <hr class="line"/>
+    <h1>Aktuelle Einkaufsliste</h1>
+    <hr class="line"/>
 </div>
 
 <div id="shopItemDetailModal" class="modal">
