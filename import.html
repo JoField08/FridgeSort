@@ -93,6 +93,8 @@
     <div id="status"></div>
 
     <button id="addExampleItemsBtn">Beispiele importieren</button>
+    <button id="addUserStatsBtn">Statistiken importieren</button>
+
 </div>
 
 <script>
@@ -199,6 +201,23 @@
 
   document.getElementById('status').innerText = `${newItems.length} neue Items wurden zur foodList hinzugefügt.`;
 });
+
+document.getElementById('addUserStatsBtn').addEventListener('click', () => {
+  const userStatsData = {
+    progress: 80,
+    level: 4,
+    savedItems: 48,
+    highscore: 30,
+    streak: 30,
+    streakSince: "13.7.2025",
+    highscoreSince: "13.7.2025",
+    badge: 1
+  };
+
+  localStorage.setItem('userStatsData', JSON.stringify(userStatsData));
+  document.getElementById('status').innerText = 'userStatsData wurde gespeichert.';
+});
+
 
 </script>
 </body>
